@@ -1,0 +1,6 @@
+webdriver_manager
+google-cloud-storage
+selenium
+pandas
+retrying
+requests

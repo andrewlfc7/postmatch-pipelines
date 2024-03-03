@@ -1,0 +1,83 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
+  SCRAPER_JOB: ${{ secrets.SCRAPER_JOB }}
+  DASHBOARDS_JOB: ${{ secrets.DASHBOARDS_JOB }}
+  REGION: us-east4
+
+jobs:
+  deploy_scraper:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Login to GAR
+        uses: docker/login-action@v3
+        with:
+          registry: '${{ env.GAR_LOCATION }}.gcr.io'
+          username: _json_key
+          password: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Build and Push Scraper Container
+        run: |
+          docker build \
+            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}" postmatch-pipelines/Post_Match_Dashboard/pipeline/scraper/
+          docker push "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}"
+
+      - name: Update Cloud Run Scraper Job Image
+        run: |
+          gcloud run jobs update ${{ env.SCRAPER_JOB }} \
+            --image "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}" \
+            --region "${{ env.REGION }}"
+
+  deploy_dashboards:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Login to GAR
+        uses: docker/login-action@v3
+        with:
+          registry: '${{ env.GAR_LOCATION }}.gcr.io'
+          username: _json_key
+          password: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Build and Push Dashboards Container
+        run: |
+          docker build \
+            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}" postmatch-pipelines/
+          docker push "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}"
+
+      - name: Update Cloud Run Dashboards Job Image
+        run: |
+          gcloud run jobs update ${{ env.DASHBOARDS_JOB }} \
+            --image "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}" \
+            --region "${{ env.REGION }}"
