@@ -75,8 +75,8 @@ jobs:
       - name: Build and Push Dashboards Container
         uses: docker/build-push-action@v2
         with:
-          context: ./Post_Match_Dashboard/
-          file: ./Post_Match_Dashboard/Dockerfile
+          context: ./
+          file: ./Dockerfile
           push: true
           tags: ${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}
 
