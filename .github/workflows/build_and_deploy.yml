@@ -38,7 +38,7 @@ jobs:
       - name: Build and Push Scraper Container
         run: |
           docker build \
-            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}" postmatch-pipelines/Post_Match_Dashboard/pipeline/scraper/
+            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}" ../Post_Match_Dashboard/pipeline/scraper/
           docker push "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.SCRAPER_JOB }}:${{ github.sha }}"
 
       - name: Update Cloud Run Scraper Job Image
@@ -73,7 +73,7 @@ jobs:
       - name: Build and Push Dashboards Container
         run: |
           docker build \
-            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}" postmatch-pipelines/
+            -t "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}" ../
           docker push "${{ env.GAR_LOCATION }}.gcr.io/${{ env.PROJECT_ID }}/${{ env.DASHBOARDS_JOB }}:${{ github.sha }}"
 
       - name: Update Cloud Run Dashboards Job Image
