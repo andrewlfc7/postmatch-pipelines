@@ -28,11 +28,10 @@ from utils import check_players_in_match
 eastern = pytz.timezone('US/Eastern')
 
 # Get the current date in Eastern Time
-# today = datetime.datetime.now(eastern).date()
-# today = today.strftime('%Y-%m-%d')
+today = datetime.datetime.now(eastern).date()
+today = today.strftime('%Y-%m-%d')
 
 
-today = '2024-03-02'
 
 user = os.environ['PGUSER']
 passwd = os.environ['PGPASSWORD']
