@@ -21,8 +21,12 @@ import os
 import json
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-# Full path to the scraper key file
-key_file_path = os.path.join(current_directory, 'scraper-key')
+
+import os
+import json
+
+# Full path to the mounted secret containing the service account key
+key_file_path = '/app/Post_Match_Dashboard/pipeline/scraper-key'
 
 # Check if the file exists
 if os.path.exists(key_file_path):
@@ -39,6 +43,7 @@ if os.path.exists(key_file_path):
     # Use key_json as needed in your code (e.g., for authentication)
 else:
     print("Error: Scraper key file not found at", key_file_path)
+
 
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()
