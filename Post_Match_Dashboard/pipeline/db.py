@@ -17,18 +17,21 @@ import os
 from google.cloud import storage
 
 
-import os
-import json
-current_directory = os.path.dirname(os.path.abspath(__file__))
-
 
 import os
 import json
 
-# Get the current script's directory
-current_directory = os.path.dirname(os.path.abspath(__file__))
-# Assuming scraper-key is stored in the same directory as db.py
-key_file_path = os.path.join(current_directory, 'scraper-key')
+# Get the parent directory of the script's directory
+parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Specify the parent directory path where the secret is mounted
+parent_mount_path = '/app/Post_Match_Dashboard/pipeline/'
+
+# Specify the path relative to the parent mount path where the secret file is located
+secret_relative_path = 'scraper-key'
+
+# Construct the full path to the secret file
+key_file_path = os.path.join(parent_directory, parent_mount_path, secret_relative_path)
 
 # Check if the file exists
 if os.path.exists(key_file_path):
