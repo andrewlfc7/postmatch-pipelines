@@ -6,10 +6,10 @@ LABEL authors="andrew"
 WORKDIR /app
 
 # Copy everything from the context into the /app directory
-#COPY . .
+COPY . .
 
-COPY Post_Match_Dashboard /app/Post_Match_Dashboard
-COPY Football_Analysis_Tools /app/Football_Analysis_Tools
+#COPY Post_Match_Dashboard /app/Post_Match_Dashboard/.
+#COPY Football_Analysis_Tools /app/Football_Analysis_Tools/.
 COPY requirements.txt /app/requirements.txt
 
 

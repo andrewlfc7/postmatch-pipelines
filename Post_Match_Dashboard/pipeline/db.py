@@ -19,6 +19,22 @@ from google.cloud import storage
 
 
 
+from sqlalchemy import create_engine,exc
+
+import os
+
+
+user = os.environ['PGUSER']
+passwd = os.environ['PGPASSWORD']
+host = os.environ['PGHOST']
+port = os.environ['PGPORT']
+db = os.environ['PGDATABASE']
+db_url = f'postgresql://{user}:{passwd}@{host}:{port}/{db}'
+
+engine = create_engine(db_url)
+
+
+
 from google.cloud import secretmanager
 
 # Initialize the Secret Manager client
@@ -109,21 +125,6 @@ csv_blob = storage_client.bucket(bucket_name).blob(csv_filename)
 csv_blob.upload_from_filename(csv_filename)
 
 
-
-
-from sqlalchemy import create_engine,exc
-
-import os
-
-
-user = os.environ['PGUSER']
-passwd = os.environ['PGPASSWORD']
-host = os.environ['PGHOST']
-port = os.environ['PGPORT']
-db = os.environ['PGDATABASE']
-db_url = f'postgresql://{user}:{passwd}@{host}:{port}/{db}'
-
-engine = create_engine(db_url)
 
 
 
