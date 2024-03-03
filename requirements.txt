@@ -22,3 +22,4 @@ selenium
 pytz
 PyYAML
 pyarrow
+fuzzywuzzy

@@ -33,6 +33,7 @@ eastern = pytz.timezone('US/Eastern')
 
 
 today = '2024-03-02'
+
 user = os.environ['PGUSER']
 passwd = os.environ['PGPASSWORD']
 host = os.environ['PGHOST']
