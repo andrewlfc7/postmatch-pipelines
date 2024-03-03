@@ -11,12 +11,11 @@ import os
 # db_script_path = os.path.join(current_directory, 'pipeline', 'db.py')
 
 # Run the scripts
-subprocess.run(['python', 'pipeline/db.py'])
+subprocess.run(['python', 'Post_Match_Dashboard/pipeline/db.py'])
 
-subprocess.run(['python', 'stats_avg.py'], check=True)
-subprocess.run(['python', 'Post_match.py'], check=True)
-subprocess.run(['python', 'player_dashboard.py'], check=True)
-subprocess.run(['python', 'pipeline/db.py'])
+subprocess.run(['python', 'Post_Match_Dashboard/stats_avg.py'], check=True)
+subprocess.run(['python', 'Post_Match_Dashboard/Post_match.py'], check=True)
+subprocess.run(['python', 'Post_Match_Dashboard/player_dashboard.py'], check=True)
 
 #
 # # twitter_api_script = os.path.join(current_directory, 'twitter-api.py')
