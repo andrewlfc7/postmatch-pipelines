@@ -20,10 +20,8 @@ from time import sleep
 import os
 import json
 
-# Get the current script's directory
-current_directory = os.path.dirname(os.path.abspath(__file__))
-# Assuming scraper-key is stored in the same directory as db.py
-key_file_path = os.path.join(current_directory, 'scraper-key')
+#
+key_file_path = '/Post_Match_Dashboard/pipeline/scraper/secret-af986d14-fb27-4e84-bcd5-6687547c1e07'
 
 # Check if the file exists
 if os.path.exists(key_file_path):
