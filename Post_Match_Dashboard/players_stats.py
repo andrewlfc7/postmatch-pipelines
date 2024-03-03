@@ -443,7 +443,7 @@ class PlayerStatsVisualizer:
         normalized_data.replace([np.inf, -np.inf], np.nan, inplace=True)
         normalized_data.dropna(inplace=True)
 
-        fig, axes = plt.subplots(nrows=len(columns)-2, ncols=1, figsize=(6, 8), dpi=300)
+        fig, axes = plt.subplots(nrows=len(columns)-2, ncols=1, figsize=(8, 9), dpi=300)
         fig.set_facecolor("#201D1D")
         fig.subplots_adjust(left=0.1, right=0.8, bottom=0.1, top=0.88, wspace=0.2, hspace=0.5)
 
@@ -573,9 +573,9 @@ df = [
 
 
 
-df_in_match = check_players_in_match(df, opta_data[opta_data['match_date']==today])
-mf_in_match = check_players_in_match(mf, opta_data[opta_data['match_date']==today])
-fw_in_match = check_players_in_match(fw, opta_data[opta_data['match_date']==today])
+df_in_match = check_players_in_match(df, merged_stats[merged_stats['match_date']==today])
+mf_in_match = check_players_in_match(mf, merged_stats[merged_stats['match_date']==today])
+fw_in_match = check_players_in_match(fw, merged_stats[merged_stats['match_date']==today])
 
 
 
