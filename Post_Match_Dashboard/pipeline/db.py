@@ -25,8 +25,10 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 import os
 import json
 
-# Full path to the mounted secret containing the service account key
-key_file_path = '/app/Post_Match_Dashboard/pipeline/scraper-key'
+# Get the current script's directory
+current_directory = os.path.dirname(os.path.abspath(__file__))
+# Assuming scraper-key is stored in the same directory as db.py
+key_file_path = os.path.join(current_directory, 'scraper-key')
 
 # Check if the file exists
 if os.path.exists(key_file_path):
@@ -34,13 +36,14 @@ if os.path.exists(key_file_path):
     with open(key_file_path, 'r') as key_file:
         key_data = key_file.read()
 
-    # Parse the JSON key data
+    # Assuming the key data is in JSON format
     key_json = json.loads(key_data)
+
+    # Use key_json as needed in your code
+    # For example, you can access individual keys like key_json['key_name']
 
     # Assuming GOOGLE_APPLICATION_CREDENTIALS is expected to contain the service account key path
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file_path
-
-    # Use key_json as needed in your code (e.g., for authentication)
 else:
     print("Error: Scraper key file not found at", key_file_path)
 
