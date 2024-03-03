@@ -39,7 +39,7 @@ engine = create_engine(db_url)
 parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Specify the parent directory path where the secret is mounted
-parent_mount_path = '/app/Post_Match_Dashboard/pipeline/'
+parent_mount_path = '/Post_Match_Dashboard/pipeline/'
 
 # Specify the path relative to the parent mount path where the secret file is located
 secret_relative_path = 'scraper-key'

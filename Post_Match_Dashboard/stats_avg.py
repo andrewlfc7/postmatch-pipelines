@@ -36,15 +36,25 @@ engine = create_engine(db_url)
 
 
 
-key_data = os.environ['postmatch-key']
+key_file_path = '/Post_Match_Dashboard/postmatch-key'
 
-# Write the key data to a temporary file
-key_path = '/tmp/service_account_key.json'
-with open(key_path, 'w') as key_file:
-    key_file.write(key_data)
+# Check if the file exists
+if os.path.exists(key_file_path):
+    # Read the contents of the file
+    with open(key_file_path, 'r') as key_file:
+        key_data = key_file.read()
 
-# Set GOOGLE_APPLICATION_CREDENTIALS to the path of the temporary key file
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_path
+    # Assuming the key data is in JSON format
+    key_json = json.loads(key_data)
+
+    # Use key_json as needed in your code
+    # For example, you can access individual keys like key_json['key_name']
+
+    # Assuming GOOGLE_APPLICATION_CREDENTIALS is expected to contain the service account key path
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file_path
+else:
+    print("Error: Scraper key file not found at", key_file_path)
+
 
 
 current_competition = 'Premier League'

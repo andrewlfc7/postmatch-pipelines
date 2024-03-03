@@ -21,7 +21,7 @@ import os
 import json
 
 #
-key_file_path = '/Post_Match_Dashboard/pipeline/scraper/secret-af986d14-fb27-4e84-bcd5-6687547c1e07'
+key_file_path = '/Post_Match_Dashboard/pipeline/scraper/scraper-key'
 
 # Check if the file exists
 if os.path.exists(key_file_path):
