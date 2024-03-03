@@ -21,7 +21,6 @@ from google.cloud import storage
 
 from sqlalchemy import create_engine,exc
 
-import os
 
 
 user = os.environ['PGUSER']
@@ -35,20 +34,36 @@ engine = create_engine(db_url)
 
 
 
-from google.cloud import secretmanager
 
-# Initialize the Secret Manager client
-client = secretmanager.SecretManagerServiceClient()
+# Get the parent directory of the script's directory
+parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Define the name of the secret
-secret_name = 'projects/979407412112/secrets/scraper-key/versions/latest'
+# Specify the parent directory path where the secret is mounted
+parent_mount_path = '/app/Post_Match_Dashboard/pipeline/'
 
-# Access the secret value
-response = client.access_secret_version(request={'name': secret_name})
-secret_value = response.payload.data.decode('UTF-8')
+# Specify the path relative to the parent mount path where the secret file is located
+secret_relative_path = 'scraper-key'
 
+# Construct the full path to the secret file
+key_file_path = os.path.join(parent_directory, parent_mount_path, secret_relative_path)
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = secret_value
+# Check if the file exists
+if os.path.exists(key_file_path):
+    # Read the contents of the file
+    with open(key_file_path, 'r') as key_file:
+        key_data = key_file.read()
+
+    # Assuming the key data is in JSON format
+    key_json = json.loads(key_data)
+
+    # Use key_json as needed in your code
+    # For example, you can access individual keys like key_json['key_name']
+
+    # Assuming GOOGLE_APPLICATION_CREDENTIALS is expected to contain the service account key path
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file_path
+else:
+    print("Error: Scraper key file not found at", key_file_path)
+
 
 
 # Initialize Google Cloud Storage client
