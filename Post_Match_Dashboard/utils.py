@@ -70,3 +70,10 @@ def pass_angle(x, y, endX, endY):
     angles_deg = np.rad2deg(angles_rad)
 
     return angles_deg
+
+def check_players_in_match(players, data):
+    players_in_match = []
+    for player in players:
+        if player in data['playerName'].values:
+            players_in_match.append(player)
+    return players_in_match

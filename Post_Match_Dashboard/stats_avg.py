@@ -110,6 +110,7 @@ else:
 shots_data = pd.read_sql(shots_query, conn)
 opta_data = pd.read_sql(opta_query, conn)
 
+
 #%%
 
 opta_data = opta_data.rename(columns={"match_id":"matchId"})
