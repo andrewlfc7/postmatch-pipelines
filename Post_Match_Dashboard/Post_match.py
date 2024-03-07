@@ -267,7 +267,7 @@ else:
 
 
 
-data = mark_turnover_followed_by_shot(data)
+# data = mark_turnover_followed_by_shot(data)
 
 
 def get_pass_stats(data):
@@ -950,140 +950,143 @@ blob.upload_from_file(figure_buffer, content_type="image/png")
 # Close the BytesIO buffer
 figure_buffer.close()
 
-fig = plt.figure(figsize=(12, 10), constrained_layout=True, dpi=650)
-gs = fig.add_gridspec(ncols=2, nrows=2)
-fig.set_facecolor("#201D1D")
-ax1 = fig.add_subplot(gs[0, 0])
-ax2 = fig.add_subplot(gs[0, 1])
-ax3 = fig.add_subplot(gs[1, 0])
-ax4 = fig.add_subplot(gs[1, 1])
 
-axes = [ax1, ax2,ax3,ax4]
-
-# apply modifications to all subplots
-for ax in axes:
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_xlabel('')
-    ax.set_ylabel('')
-    ax.grid(False)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
-    ax.spines['left'].set_visible(False)
-    ax.set_facecolor("#201D1D")
-
-
-whovis.plot_clusters_event(ax1,data=data,teamId=opta_home_teamID,k=6,filter="is_progressive == True & is_open_play == True")
-whovis.plot_clusters_event(ax3,data=data,teamId=opta_home_teamID,k=8,filter="is_open_play == True")
-whovis.plot_event_clusters_away(ax2,data=data,teamId=opta_away_teamID,k=6,filter="is_progressive == True & is_open_play == True")
-whovis.plot_event_clusters_away(ax4,data=data,teamId=opta_away_teamID,k=8,filter="is_open_play == True")
-
-
-# add titles to the subplots
-ax1.set_title(f"{home_name} Progressive Passes Cluster",size="10", c="#FCE6E6", loc="center")
-ax2.set_title(f"{away_name} Progressive Passes Cluster",size="10", c="#FCE6E6", loc="center")
-
-ax3.set_title(f"{home_name} All Attempted Passes Cluster",size="10", c="#FCE6E6", loc="center")
-ax4.set_title(f"{away_name} All Attempted Passes Cluster",size="10", c="#FCE6E6", loc="center")
-
-team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
-club_icon = Image.open(team_logo_path).convert('RGBA')
-
-
-away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
-away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
-
-#away_logo_ax = ax.inset_axes([0.75, 0.8, 0.2, 0.2], transform=ax.transAxes)
-away_logo_ax = fig.add_axes([.86, 1, .14, .08], frameon=False)
-
-
-away_logo_ax.imshow(away_club_icon, aspect='equal')
-away_logo_ax.axis('off')
-
-away_logo_ax.set_xticks([])
-away_logo_ax.set_yticks([])
-
-
-logo_ax = fig.add_axes([.02, 1, 0.14, 0.08], frameon=False)
-logo_ax.imshow(club_icon, aspect='equal')
-logo_ax.set_xticks([])
-logo_ax.set_yticks([])
-
-
-#logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
-#logo_ax.imshow(club_icon)
-logo_ax.axis('off')
-
-# create a new Axes object on the figure
-# ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
-
-
-ax = fig.add_axes([.45, 1, .1, .10], frameon=False)
-
-# add the text to the Axes object using ax_text
-ax_text(
-    0.5,
-    0.7,
-    match_score,
-    fontsize=26,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-ax_text(
-    0.5,
-    0.44,
-    match_name,
-    fontsize=14,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-ax_text(
-    0.5,
-    0.2,
-    match_label + " | " + match_season + " | " + matchDate,
-    fontsize=12,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-# finally, turn off the visibility of the Axes object
-ax.set_axis_off()
-
-
-
-
-
-# fig.savefig(f"Post_Match_Dashboard/figures/dashboard_cluster_passes{matchDate}.png", dpi=540, bbox_inches="tight")
-
-
-figure_buffer = BytesIO()
-# Save the figure to the BytesIO object
-plt.savefig(
-    figure_buffer,
-    format="png",  # Use the appropriate format for your figure
-    dpi=600,
-    bbox_inches="tight",
-    edgecolor="none",
-    transparent=False
-)
-# Reset the buffer position to the beginning
-figure_buffer.seek(0)
-# Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_cluster_passes{matchDate}.png"
-# Create a new Blob and upload the figure
-blob = bucket.blob(blob_path)
-blob.upload_from_file(figure_buffer, content_type="image/png")
-# Close the BytesIO buffer
-figure_buffer.close()
+#
+#
+# fig = plt.figure(figsize=(12, 10), constrained_layout=True, dpi=650)
+# gs = fig.add_gridspec(ncols=2, nrows=2)
+# fig.set_facecolor("#201D1D")
+# ax1 = fig.add_subplot(gs[0, 0])
+# ax2 = fig.add_subplot(gs[0, 1])
+# ax3 = fig.add_subplot(gs[1, 0])
+# ax4 = fig.add_subplot(gs[1, 1])
+#
+# axes = [ax1, ax2,ax3,ax4]
+#
+# # apply modifications to all subplots
+# for ax in axes:
+#     ax.set_xticks([])
+#     ax.set_yticks([])
+#     ax.set_xlabel('')
+#     ax.set_ylabel('')
+#     ax.grid(False)
+#     ax.spines['top'].set_visible(False)
+#     ax.spines['right'].set_visible(False)
+#     ax.spines['bottom'].set_visible(False)
+#     ax.spines['left'].set_visible(False)
+#     ax.set_facecolor("#201D1D")
+#
+#
+# whovis.plot_clusters_event(ax1,data=data,teamId=opta_home_teamID,k=6,filter="is_progressive == True & is_open_play == True")
+# whovis.plot_clusters_event(ax3,data=data,teamId=opta_home_teamID,k=8,filter="is_open_play == True")
+# whovis.plot_event_clusters_away(ax2,data=data,teamId=opta_away_teamID,k=6,filter="is_progressive == True & is_open_play == True")
+# whovis.plot_event_clusters_away(ax4,data=data,teamId=opta_away_teamID,k=8,filter="is_open_play == True")
+#
+#
+# # add titles to the subplots
+# ax1.set_title(f"{home_name} Progressive Passes Cluster",size="10", c="#FCE6E6", loc="center")
+# ax2.set_title(f"{away_name} Progressive Passes Cluster",size="10", c="#FCE6E6", loc="center")
+#
+# ax3.set_title(f"{home_name} All Attempted Passes Cluster",size="10", c="#FCE6E6", loc="center")
+# ax4.set_title(f"{away_name} All Attempted Passes Cluster",size="10", c="#FCE6E6", loc="center")
+#
+# team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
+# club_icon = Image.open(team_logo_path).convert('RGBA')
+#
+#
+# away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
+# away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
+#
+# #away_logo_ax = ax.inset_axes([0.75, 0.8, 0.2, 0.2], transform=ax.transAxes)
+# away_logo_ax = fig.add_axes([.86, 1, .14, .08], frameon=False)
+#
+#
+# away_logo_ax.imshow(away_club_icon, aspect='equal')
+# away_logo_ax.axis('off')
+#
+# away_logo_ax.set_xticks([])
+# away_logo_ax.set_yticks([])
+#
+#
+# logo_ax = fig.add_axes([.02, 1, 0.14, 0.08], frameon=False)
+# logo_ax.imshow(club_icon, aspect='equal')
+# logo_ax.set_xticks([])
+# logo_ax.set_yticks([])
+#
+#
+# #logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
+# #logo_ax.imshow(club_icon)
+# logo_ax.axis('off')
+#
+# # create a new Axes object on the figure
+# # ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
+#
+#
+# ax = fig.add_axes([.45, 1, .1, .10], frameon=False)
+#
+# # add the text to the Axes object using ax_text
+# ax_text(
+#     0.5,
+#     0.7,
+#     match_score,
+#     fontsize=26,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# ax_text(
+#     0.5,
+#     0.44,
+#     match_name,
+#     fontsize=14,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# ax_text(
+#     0.5,
+#     0.2,
+#     match_label + " | " + match_season + " | " + matchDate,
+#     fontsize=12,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# # finally, turn off the visibility of the Axes object
+# ax.set_axis_off()
+#
+#
+#
+#
+#
+# # fig.savefig(f"Post_Match_Dashboard/figures/dashboard_cluster_passes{matchDate}.png", dpi=540, bbox_inches="tight")
+#
+#
+# figure_buffer = BytesIO()
+# # Save the figure to the BytesIO object
+# plt.savefig(
+#     figure_buffer,
+#     format="png",  # Use the appropriate format for your figure
+#     dpi=600,
+#     bbox_inches="tight",
+#     edgecolor="none",
+#     transparent=False
+# )
+# # Reset the buffer position to the beginning
+# figure_buffer.seek(0)
+# # Specify the blob path within the bucket
+# blob_path = f"figures/{today}/dashboard_cluster_passes{matchDate}.png"
+# # Create a new Blob and upload the figure
+# blob = bucket.blob(blob_path)
+# blob.upload_from_file(figure_buffer, content_type="image/png")
+# # Close the BytesIO buffer
+# figure_buffer.close()
 
 
 fig = plt.figure(figsize=(12, 8), constrained_layout=True, dpi=300)
@@ -1470,118 +1473,118 @@ blob.upload_from_file(figure_buffer, content_type="image/png")
 # Close the BytesIO buffer
 figure_buffer.close()
 
-
-
-fig = plt.figure(figsize=(10, 8), constrained_layout=True, dpi=650)
-gs = fig.add_gridspec(ncols=2, nrows=2)
-fig.set_facecolor("#201D1D")
-# create subplots using gridspec
-ax1 = fig.add_subplot(gs[0, 0])
-ax2 = fig.add_subplot(gs[0, 1])
-
-axes = [ax1, ax2]
-
-whovis.plot_team_turnovers(ax1,data=data,teamId=opta_home_teamID,c=homecolor)
-
-whovis.plot_team_turnovers(ax2,data=data,teamId=opta_away_teamID,c=awaycolor)
-
-
-
-team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
-club_icon = Image.open(team_logo_path).convert('RGBA')
-
-
-away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
-away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
-
-
-#away_logo_ax = ax.inset_axes([0.75, 0.8, 0.2, 0.2], transform=ax.transAxes)
-away_logo_ax = fig.add_axes([.90, .96, .10, .08], frameon=False)
-
-
-away_logo_ax.imshow(away_club_icon, aspect='equal')
-away_logo_ax.axis('off')
-
-away_logo_ax.set_xticks([])
-away_logo_ax.set_yticks([])
-
-
-logo_ax = fig.add_axes([0, .96, 0.10, 0.08], frameon=False)
-logo_ax.imshow(club_icon, aspect='equal')
-logo_ax.set_xticks([])
-logo_ax.set_yticks([])
-
-
-#logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
-#logo_ax.imshow(club_icon)
-logo_ax.axis('off')
-# create a new Axes object on the figure
-# ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
-
-
-fig_text(
-    0.5,
-    0.98,
-    match_score,
-    fontsize=9,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-fig_text(
-    0.5,
-    0.96,
-    match_name,
-    fontsize=9,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-fig_text(
-    0.5,
-    0.94,
-    match_label + " | " + match_season + " | " + matchDate,
-    fontsize=7,
-    color="#FCE6E6",
-    ha="center",
-    va="center",
-    transform=ax.transAxes
-)
-
-# finally, turn off the visibility of the Axes object
-ax.set_axis_off()
-
-
-
-ax1.set_title(f"{home_name} Turnovers", size="8", c="#FCE6E6", loc="center")
-ax2.set_title(f"{away_name} Turnovers", size="8", c="#FCE6E6", loc="center")
-
-# fig.savefig(f"Post_Match_Dashboard/figures/dashboard_Touchheatmap{matchDate}.png", dpi=700, bbox_inches="tight")
-
-
-figure_buffer = BytesIO()
-# Save the figure to the BytesIO object
-plt.savefig(
-    figure_buffer,
-    format="png",  # Use the appropriate format for your figure
-    dpi=650,
-    bbox_inches="tight",
-    edgecolor="none",
-    transparent=False
-)
-# Reset the buffer position to the beginning
-figure_buffer.seek(0)
-# Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_turnovers{matchDate}.png"
-# Create a new Blob and upload the figure
-blob = bucket.blob(blob_path)
-blob.upload_from_file(figure_buffer, content_type="image/png")
-# Close the BytesIO buffer
-figure_buffer.close()
+#
+#
+# fig = plt.figure(figsize=(10, 8), constrained_layout=True, dpi=650)
+# gs = fig.add_gridspec(ncols=2, nrows=2)
+# fig.set_facecolor("#201D1D")
+# # create subplots using gridspec
+# ax1 = fig.add_subplot(gs[0, 0])
+# ax2 = fig.add_subplot(gs[0, 1])
+#
+# axes = [ax1, ax2]
+#
+# whovis.plot_team_turnovers(ax1,data=data,teamId=opta_home_teamID,c=homecolor)
+#
+# whovis.plot_team_turnovers(ax2,data=data,teamId=opta_away_teamID,c=awaycolor)
+#
+#
+#
+# team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
+# club_icon = Image.open(team_logo_path).convert('RGBA')
+#
+#
+# away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
+# away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
+#
+#
+# #away_logo_ax = ax.inset_axes([0.75, 0.8, 0.2, 0.2], transform=ax.transAxes)
+# away_logo_ax = fig.add_axes([.90, .96, .10, .08], frameon=False)
+#
+#
+# away_logo_ax.imshow(away_club_icon, aspect='equal')
+# away_logo_ax.axis('off')
+#
+# away_logo_ax.set_xticks([])
+# away_logo_ax.set_yticks([])
+#
+#
+# logo_ax = fig.add_axes([0, .96, 0.10, 0.08], frameon=False)
+# logo_ax.imshow(club_icon, aspect='equal')
+# logo_ax.set_xticks([])
+# logo_ax.set_yticks([])
+#
+#
+# #logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
+# #logo_ax.imshow(club_icon)
+# logo_ax.axis('off')
+# # create a new Axes object on the figure
+# # ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
+#
+#
+# fig_text(
+#     0.5,
+#     0.98,
+#     match_score,
+#     fontsize=9,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# fig_text(
+#     0.5,
+#     0.96,
+#     match_name,
+#     fontsize=9,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# fig_text(
+#     0.5,
+#     0.94,
+#     match_label + " | " + match_season + " | " + matchDate,
+#     fontsize=7,
+#     color="#FCE6E6",
+#     ha="center",
+#     va="center",
+#     transform=ax.transAxes
+# )
+#
+# # finally, turn off the visibility of the Axes object
+# ax.set_axis_off()
+#
+#
+#
+# ax1.set_title(f"{home_name} Turnovers", size="8", c="#FCE6E6", loc="center")
+# ax2.set_title(f"{away_name} Turnovers", size="8", c="#FCE6E6", loc="center")
+#
+# # fig.savefig(f"Post_Match_Dashboard/figures/dashboard_Touchheatmap{matchDate}.png", dpi=700, bbox_inches="tight")
+#
+#
+# figure_buffer = BytesIO()
+# # Save the figure to the BytesIO object
+# plt.savefig(
+#     figure_buffer,
+#     format="png",  # Use the appropriate format for your figure
+#     dpi=650,
+#     bbox_inches="tight",
+#     edgecolor="none",
+#     transparent=False
+# )
+# # Reset the buffer position to the beginning
+# figure_buffer.seek(0)
+# # Specify the blob path within the bucket
+# blob_path = f"figures/{today}/dashboard_turnovers{matchDate}.png"
+# # Create a new Blob and upload the figure
+# blob = bucket.blob(blob_path)
+# blob.upload_from_file(figure_buffer, content_type="image/png")
+# # Close the BytesIO buffer
+# figure_buffer.close()
 
 
 

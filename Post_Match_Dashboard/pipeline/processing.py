@@ -360,42 +360,42 @@ def custom_events(data):
             data.at[index, 'FinalThirdPasses'] = True
 
 
-    turnover = {'turnover'}
-    data = data.copy()
-    data['turnover'] = False
-    for index, row in enumerate(data['satisfiedEventsTypes']):
-        set_element = set(row)
-        if len(turnover.intersection(set_element)) > 0:
-            data.at[index, 'turnover'] = True
+    # turnover = {'turnover'}
+    # data = data.copy()
+    # data['turnover'] = False
+    # for index, row in enumerate(data['satisfiedEventsTypes']):
+    #     set_element = set(row)
+    #     if len(turnover.intersection(set_element)) > 0:
+    #         data.at[index, 'turnover'] = True
+    #
+    #
+    #
+    # defensiveThird = {'defensiveThird'}
+    # data = data.copy()
+    # data['defensiveThird'] = False
+    # for index, row in enumerate(data['satisfiedEventsTypes']):
+    #     set_element = set(row)
+    #     if len(defensiveThird.intersection(set_element)) > 0:
+    #         data.at[index, 'defensiveThird'] = True
+    #
 
 
-
-    defensiveThird = {'defensiveThird'}
-    data = data.copy()
-    data['defensiveThird'] = False
-    for index, row in enumerate(data['satisfiedEventsTypes']):
-        set_element = set(row)
-        if len(defensiveThird.intersection(set_element)) > 0:
-            data.at[index, 'defensiveThird'] = True
-
+    # midThird = {'midThird'}
+    # data = data.copy()
+    # data['midThird'] = False
+    # for index, row in enumerate(data['satisfiedEventsTypes']):
+    #     set_element = set(row)
+    #     if len(midThird.intersection(set_element)) > 0:
+    #         data.at[index, 'midThird'] = True
 
 
-    midThird = {'midThird'}
-    data = data.copy()
-    data['midThird'] = False
-    for index, row in enumerate(data['satisfiedEventsTypes']):
-        set_element = set(row)
-        if len(midThird.intersection(set_element)) > 0:
-            data.at[index, 'midThird'] = True
-
-
-    finalThird = {'finalThird'}
-    data = data.copy()
-    data['finalThird'] = False
-    for index, row in enumerate(data['satisfiedEventsTypes']):
-        set_element = set(row)
-        if len(finalThird.intersection(set_element)) > 0:
-            data.at[index, 'finalThird'] = True
+    # finalThird = {'finalThird'}
+    # data = data.copy()
+    # data['finalThird'] = False
+    # for index, row in enumerate(data['satisfiedEventsTypes']):
+    #     set_element = set(row)
+    #     if len(finalThird.intersection(set_element)) > 0:
+    #         data.at[index, 'finalThird'] = True
 
 
 
