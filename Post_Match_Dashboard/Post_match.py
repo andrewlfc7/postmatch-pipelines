@@ -1918,171 +1918,225 @@ away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
 away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
 
 
+#
+# for player in Home_gk:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+#                                      scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_gk:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+#                                      scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_cb:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#674997', poly_facecolor='#674997',
+#                                      scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_cb:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#674997', poly_facecolor='#674997',
+#                                      scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_fullbacks:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+#                                      scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_fullbacks:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+#                                      scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_midfielders:
+#     player_df = player_dfs[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+#                                      scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+#
+#
+# for player in Home_midfielders:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+#                                      scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_attackers:
+#     player_df = player_dfs[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+#                                      scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Home_attackers:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+#                                      scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+#
+# for player in Away_gk:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+#                                      scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_gk:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+#                                      scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_cb:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#674997', poly_facecolor='#674997',
+#                                      scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_cb:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#674997', poly_facecolor='#674997',
+#                                      scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_fullbacks:
+#     player_df = player_dfs[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+#                                      scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_fullbacks:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty: 
+#         whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+#                                      scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_midfielders:
+#     player_df = player_dfs[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+#                                      scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+#
+#
+# for player in Away_midfielders:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+#                                      scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_attackers:
+#     player_df = player_dfs[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+#                                      scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
+# for player in Away_attackers:
+#     player_df = player_offensive_actions[player]
+#     if not player_df.empty and len(player_df) > 3: 
+#         whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+#                                      scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+#     else:
+#         print(f"Not enough points for {player}. Skipping...")
+#
 
-for player in Home_gk:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#44335a', poly_facecolor='#44335a',
-                                     scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_gk:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#44335a', poly_facecolor='#44335a',
-                                     scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_cb:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#674997', poly_facecolor='#674997',
-                                     scatter_facecolor='#674997', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_cb:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#674997', poly_facecolor='#674997',
-                                     scatter_facecolor='#674997', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_fullbacks:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#007a72', poly_facecolor='#007a72',
-                                     scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_fullbacks:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#007a72', poly_facecolor='#007a72',
-                                     scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_midfielders:
-    player_df = player_dfs[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
-                                     scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
+try:
+    for player_group in [Home_gk, Home_cb, Home_fullbacks, Home_midfielders, Home_attackers]:
+        for player in player_group:
+            player_df = player_dfs[player]
+            if not player_df.empty and len(player_df) > 4:
+                if player_group == Home_gk:
+                    whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+                                                 scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+                elif player_group == Home_cb:
+                    whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#674997', poly_facecolor='#674997',
+                                                 scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+                elif player_group == Home_fullbacks:
+                    whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+                                                 scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+                elif player_group == Home_midfielders:
+                    whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+                                                 scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+                elif player_group == Home_attackers:
+                    whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+                                                 scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+            else:
+                print(f"Not enough points for {player}. Skipping...")
+except Exception as e:
+    print(f"An error occurred: {str(e)}")
 
 
-
-for player in Home_midfielders:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
-                                     scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_attackers:
-    player_df = player_dfs[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax1, poly_edgecolor='#edae49', poly_facecolor='#edae49',
-                                     scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Home_attackers:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_team(player_df, ax3, poly_edgecolor='#edae49', poly_facecolor='#edae49',
-                                     scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-
-for player in Away_gk:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#44335a', poly_facecolor='#44335a',
-                                     scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_gk:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#44335a', poly_facecolor='#44335a',
-                                     scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_cb:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#674997', poly_facecolor='#674997',
-                                     scatter_facecolor='#674997', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_cb:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#674997', poly_facecolor='#674997',
-                                     scatter_facecolor='#674997', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_fullbacks:
-    player_df = player_dfs[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#007a72', poly_facecolor='#007a72',
-                                     scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_fullbacks:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#007a72', poly_facecolor='#007a72',
-                                     scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_midfielders:
-    player_df = player_dfs[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
-                                     scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
+try:
+    for player_group in [Away_gk, Away_cb, Away_fullbacks, Away_midfielders, Away_attackers]:
+        for player in player_group:
+            player_df = player_dfs[player]
+            if not player_df.empty and len(player_df) > 4:
+                if player_group == Away_gk:
+                    whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#44335a', poly_facecolor='#44335a',
+                                                     scatter_facecolor='#44335a', avg_marker_size=200, sd=2)
+                elif player_group == Away_cb:
+                    whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#674997', poly_facecolor='#674997',
+                                                     scatter_facecolor='#674997', avg_marker_size=200, sd=2)
+                elif player_group == Away_fullbacks:
+                    whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#007a72', poly_facecolor='#007a72',
+                                                     scatter_facecolor='#007a72', avg_marker_size=200, sd=2)
+                elif player_group == Away_midfielders:
+                    whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
+                                                     scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
+                elif player_group == Away_attackers:
+                    whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#edae49', poly_facecolor='#edae49',
+                                                     scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
+            else:
+                print(f"Not enough points for {player}. Skipping...")
+except Exception as e:
+    print(f"An error occurred: {str(e)}")
 
 
-
-for player in Away_midfielders:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#d1495b', poly_facecolor='#d1495b',
-                                     scatter_facecolor='#d1495b', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_attackers:
-    player_df = player_dfs[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax2, poly_edgecolor='#edae49', poly_facecolor='#edae49',
-                                     scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
-
-for player in Away_attackers:
-    player_df = player_offensive_actions[player]
-    if not player_df.empty and len(player_df) > 3:  # check if there are at least 5 points for the player
-        whovis.plot_player_hull_awayteam(player_df, ax4, poly_edgecolor='#edae49', poly_facecolor='#edae49',
-                                     scatter_facecolor='#edae49', avg_marker_size=200, sd=2)
-    else:
-        print(f"Not enough points for {player}. Skipping...")
 
 away_logo_ax = fig.add_axes([.90, 1, .10, .08], frameon=False)
 
