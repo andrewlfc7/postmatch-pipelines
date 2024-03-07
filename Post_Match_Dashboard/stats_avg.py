@@ -38,19 +38,12 @@ engine = create_engine(db_url)
 
 key_file_path = '/Post_Match_Dashboard/postmatch-key'
 
-# Check if the file exists
 if os.path.exists(key_file_path):
-    # Read the contents of the file
     with open(key_file_path, 'r') as key_file:
         key_data = key_file.read()
 
-    # Assuming the key data is in JSON format
     key_json = json.loads(key_data)
 
-    # Use key_json as needed in your code
-    # For example, you can access individual keys like key_json['key_name']
-
-    # Assuming GOOGLE_APPLICATION_CREDENTIALS is expected to contain the service account key path
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file_path
 else:
     print("Error: Scraper key file not found at", key_file_path)

@@ -28,7 +28,7 @@ from sqlalchemy import create_engine
 import datetime
 import pytz
 
-from utils import check_logo_existence, ax_logo,get_and_save_logo,mark_turnover_followed_by_shot,pass_angle
+from utils import check_logo_existence, ax_logo,get_and_save_logo,pass_angle
 from ast import literal_eval
 import json
 
@@ -93,8 +93,6 @@ shots_data = pd.read_sql(shots_query, conn)
 data = pd.read_sql(query, conn)
 
 
-
-os.environ['GOOGLE_APPLICATION_CREDENTIALS']='Post_Match_Dashboard/careful-aleph-398521-f12755bcaea3.json'
 
 
 
@@ -541,7 +539,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 
-# Initialize Google Cloud Storage client and get the bucket
+
 storage_client = storage.Client()
 bucket_name = "postmatch-dashboards"
 bucket = storage_client.get_bucket(bucket_name)
