@@ -30,7 +30,7 @@ import pytz
 
 from utils import check_logo_existence, ax_logo,get_and_save_logo,mark_turnover_followed_by_shot,pass_angle
 from ast import literal_eval
-
+import json
 
 user = os.environ['PGUSER']
 passwd = os.environ['PGPASSWORD']
