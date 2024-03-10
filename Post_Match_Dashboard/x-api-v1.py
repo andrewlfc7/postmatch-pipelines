@@ -119,9 +119,7 @@ match_name = get_match_name(Fotmob_matchID)
 
 client = storage.Client()
 
-# Define bucket name and folder prefix
-bucket_name = "postmatch-dashboards"
-folder_prefix = f'figures/{today}/'
+
 
 bucket_name = "postmatch-dashboards"
 folder_prefix_players = f'figures/{today}/players/'
@@ -153,18 +151,3 @@ if player_files:
                 reply_result = reply_images(api, [image], player_first_tweet_id)
                 print("Player dashboard reply posted successfully:", reply_result)
 
-# Tweet team images
-team_main_images = [os.path.join(folder_prefix, file) for file in team_files if 'main' in file]
-team_other_images = [os.path.join(folder_prefix, file) for file in team_files if 'main' not in file]
-
-if team_main_images:
-    for i in range(0, len(team_main_images), 4):
-        team_main_images_batch = team_main_images[i:i+4]
-        tweet_result = tweet_images(api, team_main_images_batch, tweet=f'{match_name} Team Dashboards')
-        print("Team main tweet posted successfully:", tweet_result)
-        team_main_tweet_id = tweet_result.data['id']
-
-        other_images_batch = team_other_images[i:i+4]
-        for image in other_images_batch:
-            reply_result = reply_images(api, [image], team_main_tweet_id)
-            print("Team main reply posted successfully:", reply_result)
