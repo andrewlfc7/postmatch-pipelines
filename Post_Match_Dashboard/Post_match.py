@@ -56,22 +56,13 @@ today = today.strftime('%Y-%m-%d')
 
 key_file_path = '/Post_Match_Dashboard/postmatch-key'
 
-# Check if the file exists
 if os.path.exists(key_file_path):
-    # Read the contents of the file
     with open(key_file_path, 'r') as key_file:
         key_data = key_file.read()
-
-    # Assuming the key data is in JSON format
     key_json = json.loads(key_data)
-
-    # Use key_json as needed in your code
-    # For example, you can access individual keys like key_json['key_name']
-
-    # Assuming GOOGLE_APPLICATION_CREDENTIALS is expected to contain the service account key path
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file_path
 else:
-    print("Error: Scraper key file not found at", key_file_path)
+    print("Error: postmatch key file not found at", key_file_path)
 
 
 
@@ -530,7 +521,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -545,7 +536,7 @@ bucket_name = "postmatch-dashboards"
 bucket = storage_client.get_bucket(bucket_name)
 
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboardmain{today}.png"
+blob_path = f"figures/{today}/team/dashboardmain{today}.png"
 
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
@@ -656,7 +647,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -664,7 +655,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboardpassnetworkhome{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboardpassnetworkhome{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -761,7 +752,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -769,7 +760,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboardpassnetworkaway{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboardpassnetworkaway{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -933,7 +924,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -941,7 +932,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_teamactions{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_teamactions{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -951,7 +942,7 @@ figure_buffer.close()
 
 #
 #
-# fig = plt.figure(figsize=(12, 10), constrained_layout=True, dpi=650)
+# fig = plt.figure(figsize=(12, 10), constrained_layout=True, dpi=500)
 # gs = fig.add_gridspec(ncols=2, nrows=2)
 # fig.set_facecolor("#201D1D")
 # ax1 = fig.add_subplot(gs[0, 0])
@@ -1079,7 +1070,7 @@ figure_buffer.close()
 # # Reset the buffer position to the beginning
 # figure_buffer.seek(0)
 # # Specify the blob path within the bucket
-# blob_path = f"figures/{today}/dashboard_cluster_passes{matchDate}.png"
+# blob_path = f"figures/{today}/team/dashboard_cluster_passes{matchDate}.png"
 # # Create a new Blob and upload the figure
 # blob = bucket.blob(blob_path)
 # blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1207,7 +1198,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -1215,7 +1206,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_xT_heatmap{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_xT_heatmap{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1342,7 +1333,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -1350,7 +1341,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_passes{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_passes{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1360,7 +1351,7 @@ figure_buffer.close()
 
 
 
-fig = plt.figure(figsize=(12, 14), constrained_layout=True, dpi=650)
+fig = plt.figure(figsize=(12, 14), constrained_layout=True, dpi=500)
 gs = fig.add_gridspec(ncols=2, nrows=2)
 fig.set_facecolor("#201D1D")
 # create subplots using gridspec
@@ -1456,7 +1447,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -1464,7 +1455,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_Touchheatmap{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_Touchheatmap{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1473,7 +1464,7 @@ figure_buffer.close()
 
 #
 #
-# fig = plt.figure(figsize=(10, 8), constrained_layout=True, dpi=650)
+# fig = plt.figure(figsize=(10, 8), constrained_layout=True, dpi=500)
 # gs = fig.add_gridspec(ncols=2, nrows=2)
 # fig.set_facecolor("#201D1D")
 # # create subplots using gridspec
@@ -1569,7 +1560,7 @@ figure_buffer.close()
 # plt.savefig(
 #     figure_buffer,
 #     format="png",  # Use the appropriate format for your figure
-#     dpi=650,
+#     dpi=500,
 #     bbox_inches="tight",
 #     edgecolor="none",
 #     transparent=False
@@ -1577,7 +1568,7 @@ figure_buffer.close()
 # # Reset the buffer position to the beginning
 # figure_buffer.seek(0)
 # # Specify the blob path within the bucket
-# blob_path = f"figures/{today}/dashboard_turnovers{matchDate}.png"
+# blob_path = f"figures/{today}/team/dashboard_turnovers{matchDate}.png"
 # # Create a new Blob and upload the figure
 # blob = bucket.blob(blob_path)
 # blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1646,7 +1637,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -1654,7 +1645,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_xT_bar{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_main_xT_bar{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -1792,7 +1783,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -1800,7 +1791,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboard_odds{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboard_main_odds{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -2149,7 +2140,7 @@ figure_buffer = BytesIO()
 plt.savefig(
     figure_buffer,
     format="png",  # Use the appropriate format for your figure
-    dpi=650,
+    dpi=500,
     bbox_inches="tight",
     edgecolor="none",
     transparent=False
@@ -2157,7 +2148,7 @@ plt.savefig(
 # Reset the buffer position to the beginning
 figure_buffer.seek(0)
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/dashboardTerritory_Map{matchDate}.png"
+blob_path = f"figures/{today}/team/dashboardTerritory_Map{matchDate}.png"
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)
 blob.upload_from_file(figure_buffer, content_type="image/png")

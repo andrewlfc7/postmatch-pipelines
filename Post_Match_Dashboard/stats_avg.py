@@ -513,7 +513,7 @@ bucket_name = "postmatch-dashboards"
 bucket = storage_client.get_bucket(bucket_name)
 
 # Specify the blob path within the bucket
-blob_path = f"figures/{today}/match_avgDashboard{today}.png"
+blob_path = f"figures/{today}/team/main_match_avgDashboard{today}.png"
 
 # Create a new Blob and upload the figure
 blob = bucket.blob(blob_path)

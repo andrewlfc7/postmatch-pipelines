@@ -608,7 +608,7 @@ for player in fw_in_match:
 
 
         # Specify the blob path within the bucket
-        blob_path = f"figures/{today}/{player.replace(' ', '_')}_avgDashboard{today}.png"
+        blob_path = f"figures/{today}/players/{player.replace(' ', '_')}_avgDashboard{today}.png"
 
         # Create a new Blob and upload the figure
         blob = bucket.blob(blob_path)
@@ -651,7 +651,7 @@ for player in mf_in_match:
         # Get today's date (assuming 'today' is defined elsewhere)
 
         # Specify the blob path within the bucket
-        blob_path = f"figures/{today}/{player.replace(' ', '_')}_avgDashboard{today}.png"
+        blob_path = f"figures/{today}/players/{player.replace(' ', '_')}_avgDashboard{today}.png"
 
         # Create a new Blob and upload the figure
         blob = bucket.blob(blob_path)
@@ -691,7 +691,7 @@ for player in df_in_match:
         bucket = storage_client.get_bucket(bucket_name)
 
         # Specify the blob path within the bucket
-        blob_path = f"figures/{today}/{player.replace(' ', '_')}_avgDashboard{today}.png"
+        blob_path = f"figures/{today}/players/{player.replace(' ', '_')}_avgDashboard{today}.png"
 
         # Create a new Blob and upload the figure
         blob = bucket.blob(blob_path)

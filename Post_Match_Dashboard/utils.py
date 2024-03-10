@@ -77,3 +77,13 @@ def check_players_in_match(players, data):
         if player in data['playerName'].values:
             players_in_match.append(player)
     return players_in_match
+
+def get_match_name(match_id):
+    response = requests.get(f'https://www.fotmob.com/api/matchDetails?matchId={match_id}')
+    data = json.loads(response.content)
+    general = data['general']
+    Hteam = general['homeTeam']
+    Ateam = general['awayTeam']
+    Hteam = Hteam['name']
+    Ateam = Ateam['name']
+    return Hteam + " " + "vs" + " " + Ateam

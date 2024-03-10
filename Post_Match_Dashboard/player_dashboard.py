@@ -21,9 +21,7 @@ from PIL import Image
 import urllib
 from Football_Analysis_Tools import fotmob_visuals as fotmobvis
 from Football_Analysis_Tools import  whoscored_visuals as whovis
-#%%
 from Football_Analysis_Tools import whoscored_data_engineering as who_eng
-import datetime
 import os
 from sqlalchemy import create_engine
 import datetime
@@ -42,13 +40,10 @@ conn = engine.connect()
 
 
 
-# Set the time zone to Eastern Time
 eastern = pytz.timezone('US/Eastern')
-
-# Get the current date in Eastern Time
 today = datetime.datetime.now(eastern).date()
 today = today.strftime('%Y-%m-%d')
-#
+
 
 
 shots_query =f"""
@@ -111,7 +106,20 @@ for col in bool_cols:
 
 
 
-#%%
+# def get_opp_name(match_id):
+#     response = requests.get(f'https://www.fotmob.com/api/matchDetails?matchId={match_id}')
+#     data = json.loads(response.content)
+#     general = data['general']
+#     Hteam = general['homeTeam']
+#     Ateam = general['awayTeam']
+#     Hteam = Hteam['name']
+#     Ateam = Ateam['name']
+#     return Hteam + " " + "vs" + " " + Ateam
+#
+#
+# match_name = get_match_name(Fotmob_matchID)
+#
+
 
 data['qualifiers'] = [literal_eval(x) for x in data['qualifiers']]
 data['satisfiedEventsTypes'] = [literal_eval(x) for x in data['satisfiedEventsTypes']]
@@ -407,7 +415,7 @@ def get_player_id(name):
 #     bucket = storage_client.get_bucket(bucket_name)
 #
 #     # Specify the blob path within the bucket
-#     blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+#     blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 #
 #     # Create a new Blob and upload the figure
 #     blob = bucket.blob(blob_path)
@@ -490,7 +498,7 @@ for player_name in centerbacks_in_match:
     storage_client = storage.Client()
     bucket_name = "postmatch-dashboards"
     bucket = storage_client.get_bucket(bucket_name)
-    blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+    blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
     blob = bucket.blob(blob_path)
     blob.upload_from_file(figure_buffer, content_type="image/png")
     figure_buffer.close()
@@ -593,7 +601,7 @@ for player_name in centerbacks_in_match:
 #     bucket = storage_client.get_bucket(bucket_name)
 #
 #     # Specify the blob path within the bucket
-#     blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+#     blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 #
 #     # Create a new Blob and upload the figure
 #     blob = bucket.blob(blob_path)
@@ -662,7 +670,7 @@ for player_name in fullbacks_in_match:
     bucket_name = "postmatch-dashboards"
     bucket = storage_client.get_bucket(bucket_name)
 
-    blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+    blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 
     blob = bucket.blob(blob_path)
     blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -767,7 +775,7 @@ for player_name in fullbacks_in_match:
 #     bucket = storage_client.get_bucket(bucket_name)
 #
 #     # Specify the blob path within the bucket
-#     blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+#     blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 #
 #     # Create a new Blob and upload the figure
 #     blob = bucket.blob(blob_path)
@@ -837,7 +845,7 @@ for player_name in midfielders_in_match:
     bucket_name = "postmatch-dashboards"
     bucket = storage_client.get_bucket(bucket_name)
 
-    blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+    blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 
     blob = bucket.blob(blob_path)
     blob.upload_from_file(figure_buffer, content_type="image/png")
@@ -938,7 +946,7 @@ for player_name in midfielders_in_match:
 #     bucket = storage_client.get_bucket(bucket_name)
 #
 #     # Specify the blob path within the bucket
-#     blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+#     blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 #
 #     # Create a new Blob and upload the figure
 #     blob = bucket.blob(blob_path)
@@ -1009,7 +1017,7 @@ for player_name in forwards_in_match:
     bucket_name = "postmatch-dashboards"
     bucket = storage_client.get_bucket(bucket_name)
 
-    blob_path = f"figures/{today}/playerdashboard{player_name}.png"
+    blob_path = f"figures/{today}/players/playerdashboard{player_name}.png"
 
     blob = bucket.blob(blob_path)
     blob.upload_from_file(figure_buffer, content_type="image/png")
