@@ -25,4 +25,4 @@ pyarrow
 fuzzywuzzy
 joblib
 tweepy
-json
+
