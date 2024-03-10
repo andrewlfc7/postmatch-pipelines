@@ -23,3 +23,5 @@ pytz
 PyYAML
 pyarrow
 fuzzywuzzy
+joblib
+tweepy
