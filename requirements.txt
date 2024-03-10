@@ -26,4 +26,3 @@ fuzzywuzzy
 joblib
 tweepy
 json
-subprocess
