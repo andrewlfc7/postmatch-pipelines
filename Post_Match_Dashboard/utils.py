@@ -3,6 +3,7 @@ from PIL import Image
 from io import BytesIO
 import os
 import numpy as np
+import json
 
 
 def check_logo_existence(away_id, home_id):
