@@ -125,29 +125,33 @@ folder_prefix_team = f'figures/{today}/team/'
 
 bucket = client.get_bucket(bucket_name)
 
-if not os.path.exists('figures'):
-    os.makedirs('figures')
+# Get bucket from Google Cloud Storage
+bucket = client.get_bucket(bucket_name)
 
+# Create local directory if it doesn't exist
+if not os.path.exists('figures/players'):
+    os.makedirs('figures/players')
 
+# Download player images from Google Cloud Storage
 blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
 player_files = []
 for blob in blob_list_players:
     if not blob.name.endswith('/'):
-        file_name = blob.name.split('/')[-1]
-        blob.download_to_filename(f'figures/{file_name}')
-        player_files.append(f'figures/{file_name}')
-
+        file_name = os.path.basename(blob.name)
+        local_file_path = os.path.join('figures', 'players', file_name)
+        blob.download_to_filename(local_file_path)
+        player_files.append(local_file_path)
 
 # Group player images by fours
 player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
 
 # Construct the figures list
-figures = [[f'figures/{file_name}' for file_name in group] for group in player_images_grouped]
+figures = [[file_path for file_path in group] for group in player_images_grouped]
 
 # Tweet the grouped player images
 for i, player_images in enumerate(figures):
     if player_images:
-        tweet_content = f'{match_name} Players Dashboards'
+        tweet_content = f'{match_name} Players Dashboards (Group {i+1}):'
         tweet_result = tweet_images(api, player_images, tweet=tweet_content)
         print("Player main tweet posted successfully:", tweet_result)
         player_first_tweet_id = tweet_result.data['id']
