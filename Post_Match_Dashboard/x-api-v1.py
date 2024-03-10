@@ -138,25 +138,16 @@ for blob in blob_list_players:
         player_files.append(f'figures/{file_name}')
 
 
-
-
 # Group player images by fours
 player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
 
-# Print the first player group for debugging
-print("First player group:", player_images_grouped[0])
-
 # Construct the figures list
-figures = []
-for group in player_images_grouped:
-    figures.append([f'figures/{file_name}' for file_name in group])
-
-print("First group of player images:", figures[0])
+figures = [[f'figures/{file_name}' for file_name in group] for group in player_images_grouped]
 
 # Tweet the grouped player images
 for i, player_images in enumerate(figures):
     if player_images:
-        tweet_content = f'{match_name} Players Dashboards (Group {i+1}):'
+        tweet_content = f'{match_name} Players Dashboards'
         tweet_result = tweet_images(api, player_images, tweet=tweet_content)
         print("Player main tweet posted successfully:", tweet_result)
         player_first_tweet_id = tweet_result.data['id']
