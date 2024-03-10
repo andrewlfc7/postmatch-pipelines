@@ -123,19 +123,20 @@ client = storage.Client()
 bucket_name = "postmatch-dashboards"
 folder_prefix = f'figures/{today}/'
 
-# Get the bucket
+bucket_name = "postmatch-dashboards"
+folder_prefix_players = f'figures/{today}/players/'
+folder_prefix_team = f'figures/{today}/team/'
+
 bucket = client.get_bucket(bucket_name)
 
-# List blobs with the specified folder prefix
-blob_list = bucket.list_blobs(prefix=folder_prefix)
+blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
+player_files = [blob.name.split('/')[-1] for blob in blob_list_players if not blob.name.endswith('/')]
 
-# Extract figure files from blob names
-figure_files = [blob.name.split('/')[-1] for blob in blob_list if not blob.name.endswith('/')]
+blob_list_team = bucket.list_blobs(prefix=folder_prefix_team)
+team_files = [blob.name.split('/')[-1] for blob in blob_list_team if not blob.name.endswith('/')]
 
-# Extract player and team files
-player_files = [file for file in figure_files if 'players' in file]
-team_files = [file for file in figure_files if 'team' in file]
-print(player_files)
+print("Player files:", player_files)
+print("Team files:", team_files)
 
 # Tweet player images
 if player_files:
