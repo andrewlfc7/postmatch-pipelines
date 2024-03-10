@@ -13,4 +13,4 @@ scripts = [
 
 Parallel(n_jobs=len(scripts))(delayed(subprocess.run)(['python', script], check=True) for script in scripts[1:])
 
-subprocess.run(['python', 'Post_Match_Dashboard/x-api-v1.py'], check=True)
+subprocess.run(['python', 'Post_Match_Dashboard/x-api-v1.py'])
