@@ -135,6 +135,7 @@ figure_files = [blob.name.split('/')[-1] for blob in blob_list if not blob.name.
 # Extract player and team files
 player_files = [file for file in figure_files if 'players' in file]
 team_files = [file for file in figure_files if 'team' in file]
+print(player_files)
 
 # Tweet player images
 if player_files:
