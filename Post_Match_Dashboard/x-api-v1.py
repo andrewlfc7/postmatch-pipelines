@@ -138,7 +138,7 @@ print("Team files:", team_files)
 
 # Group player images by fours
 player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
-
+print(player_images_grouped)
 # Iterate through each group
 for player_images in player_images_grouped:
     # Tweet the group of player images
@@ -147,8 +147,8 @@ for player_images in player_images_grouped:
         print("Player main tweet posted successfully:", tweet_result)
         player_first_tweet_id = tweet_result.data['id']
 
-        player_other_images = player_images[1:]
-
-        for image in player_other_images:
-            reply_result = reply_images(api, [image], player_first_tweet_id)
-            print("Player dashboard reply posted successfully:", reply_result)
+        # player_other_images = player_images[1:]
+        #
+        # for image in player_other_images:
+        #     reply_result = reply_images(api, [image], player_first_tweet_id)
+        #     print("Player dashboard reply posted successfully:", reply_result)
