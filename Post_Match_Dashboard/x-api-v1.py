@@ -136,18 +136,19 @@ team_files = [blob.name.split('/')[-1] for blob in blob_list_team if not blob.na
 print("Player files:", player_files)
 print("Team files:", team_files)
 
-# Tweet player images
-if player_files:
-    for i in range(0, len(player_files), 4):
-        player_images = player_files[i:i+4]
-        if player_images:
-            tweet_result = tweet_images(api, player_images, tweet=f'{match_name} Players Dashboards')
-            print("Player main tweet posted successfully:", tweet_result)
-            player_first_tweet_id = tweet_result.data['id']
+# Group player images by fours
+player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
 
-            player_other_images = player_images[1:]
+# Iterate through each group
+for player_images in player_images_grouped:
+    # Tweet the group of player images
+    if player_images:
+        tweet_result = tweet_images(api, player_images, tweet=f'{match_name} Players Dashboards')
+        print("Player main tweet posted successfully:", tweet_result)
+        player_first_tweet_id = tweet_result.data['id']
 
-            for image in player_other_images:
-                reply_result = reply_images(api, [image], player_first_tweet_id)
-                print("Player dashboard reply posted successfully:", reply_result)
+        player_other_images = player_images[1:]
 
+        for image in player_other_images:
+            reply_result = reply_images(api, [image], player_first_tweet_id)
+            print("Player dashboard reply posted successfully:", reply_result)
