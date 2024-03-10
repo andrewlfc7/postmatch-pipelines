@@ -132,16 +132,11 @@ blob_list = bucket.list_blobs(prefix=folder_prefix)
 # Extract figure files from blob names
 figure_files = [blob.name.split('/')[-1] for blob in blob_list if not blob.name.endswith('/')]
 
-# Extract images in batches of four
-for i in range(0, len(figure_files), 4):
-    images = [os.path.join(folder_prefix, file) for file in figure_files[i:i+4]]
-    print(images)
-
 # Extract player and team files
 player_files = [file for file in figure_files if 'players' in file]
 team_files = [file for file in figure_files if 'team' in file]
 
-
+# Tweet player images
 if player_files:
     for i in range(0, len(player_files), 4):
         player_images = player_files[i:i+4]
@@ -150,23 +145,30 @@ if player_files:
             print("Player main tweet posted successfully:", tweet_result)
             player_first_tweet_id = tweet_result.data['id']
 
-            player_other_images = player_images
+            player_other_images = player_images[1:]
 
             for image in player_other_images:
                 reply_result = reply_images(api, [image], player_first_tweet_id)
                 print("Player dashboard reply posted successfully:", reply_result)
 
-
-
+# Tweet team images
 team_main_images = [os.path.join(folder_prefix, file) for file in team_files if 'main' in file]
 team_other_images = [os.path.join(folder_prefix, file) for file in team_files if 'main' not in file]
 
 if team_main_images:
-    tweet_result = tweet_images(api, team_main_images, tweet=f'{match_name} Team Dashboards')
-    print("First team main tweet posted successfully:", tweet_result)
-    team_main_tweet_id = tweet_result.data['id']
+    for i in range(0, len(team_main_images), 4):
+        team_main_images_batch = team_main_images[i:i+4]
+        tweet_result = tweet_images(api, team_main_images_batch, tweet=f'{match_name} Team Dashboards')
+        print("Team main tweet posted successfully:", tweet_result)
+        team_main_tweet_id = tweet_result.data['id']
 
-    for i in range(0, len(team_other_images), 4):
-        images = team_other_images[i:i+4]
-        reply_result = reply_images(api, images, team_main_tweet_id)
-        print("Team main reply posted successfully:", reply_result)
+        other_images_batch = team_other_images[i:i+4]
+        for image in other_images_batch:
+            reply_result = reply_images(api, [image], team_main_tweet_id)
+            print("Team main reply posted successfully:", reply_result)
+
+# Handle remaining images
+remaining_images = team_other_images[len(team_main_images):]
+for image in remaining_images:
+    reply_result = reply_images(api, [image], team_main_tweet_id)
+    print("Team main reply (remaining images) posted successfully:", reply_result)
