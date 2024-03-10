@@ -166,9 +166,3 @@ if team_main_images:
         for image in other_images_batch:
             reply_result = reply_images(api, [image], team_main_tweet_id)
             print("Team main reply posted successfully:", reply_result)
-
-# Handle remaining images
-remaining_images = team_other_images[len(team_main_images):]
-for image in remaining_images:
-    reply_result = reply_images(api, [image], team_main_tweet_id)
-    print("Team main reply (remaining images) posted successfully:", reply_result)
