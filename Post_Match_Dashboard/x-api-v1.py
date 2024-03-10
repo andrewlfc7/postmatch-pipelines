@@ -118,19 +118,26 @@ match_name = get_match_name(Fotmob_matchID)
 
 
 client = storage.Client()
+
+# Define bucket name and folder prefix
 bucket_name = "postmatch-dashboards"
 folder_prefix = f'figures/{today}/'
 
+# Get the bucket
 bucket = client.get_bucket(bucket_name)
 
+# List blobs with the specified folder prefix
 blob_list = bucket.list_blobs(prefix=folder_prefix)
 
-figure_files = [blob.name.split('/')[-1] for blob in blob_list if blob.name.endswith('/') == False]
+# Extract figure files from blob names
+figure_files = [blob.name.split('/')[-1] for blob in blob_list if not blob.name.endswith('/')]
 
+# Extract images in batches of four
 for i in range(0, len(figure_files), 4):
     images = [os.path.join(folder_prefix, file) for file in figure_files[i:i+4]]
     print(images)
 
+# Extract player and team files
 player_files = [file for file in figure_files if 'players' in file]
 team_files = [file for file in figure_files if 'team' in file]
 
