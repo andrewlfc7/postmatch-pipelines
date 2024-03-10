@@ -119,36 +119,32 @@ match_name = get_match_name(Fotmob_matchID)
 
 client = storage.Client()
 
-
-
 bucket_name = "postmatch-dashboards"
 folder_prefix_players = f'figures/{today}/players/'
 folder_prefix_team = f'figures/{today}/team/'
 
 bucket = client.get_bucket(bucket_name)
 
+# Download player images
 blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
-player_files = [blob.name.split('/')[-1] for blob in blob_list_players if not blob.name.endswith('/')]
-
-blob_list_team = bucket.list_blobs(prefix=folder_prefix_team)
-team_files = [blob.name.split('/')[-1] for blob in blob_list_team if not blob.name.endswith('/')]
-
-print("Player files:", player_files)
-print("Team files:", team_files)
+player_files = []
+for blob in blob_list_players:
+    if not blob.name.endswith('/'):
+        file_name = blob.name.split('/')[-1]
+        blob.download_to_filename(f'figures/{file_name}')
+        player_files.append(f'figures/{file_name}')
 
 # Group player images by fours
 player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
-print(player_images_grouped)
-# Iterate through each group
-for player_images in player_images_grouped:
-    # Tweet the group of player images
+
+# Tweet the grouped player images
+for i, player_images in enumerate(player_images_grouped):
     if player_images:
-        tweet_result = tweet_images(api, player_images, tweet=f'{match_name} Players Dashboards')
+        tweet_content = f'{match_name} Players Dashboards (Group {i+1}):'
+        tweet_result = tweet_images(api, player_images, tweet=tweet_content)
         print("Player main tweet posted successfully:", tweet_result)
         player_first_tweet_id = tweet_result.data['id']
-
-        # player_other_images = player_images[1:]
-        #
-        # for image in player_other_images:
-        #     reply_result = reply_images(api, [image], player_first_tweet_id)
-        #     print("Player dashboard reply posted successfully:", reply_result)
+        player_other_images = player_images[1:]
+        for image in player_other_images:
+            reply_result = reply_images(api, [image], player_first_tweet_id)
+            print("Player dashboard reply posted successfully:", reply_result)
