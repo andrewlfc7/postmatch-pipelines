@@ -124,17 +124,36 @@ folder_prefix_players = f'figures/{today}/players/'
 folder_prefix_team = f'figures/{today}/team/'
 
 bucket = client.get_bucket(bucket_name)
+#
+# # Get bucket from Google Cloud Storage
+# bucket = client.get_bucket(bucket_name)
+#
+# # Create local directory if it doesn't exist
+# if not os.path.exists('figures/players'):
+#     os.makedirs('figures/players')
+#
+# # Download player images from Google Cloud Storage
+# blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
+# player_files = []
+# for blob in blob_list_players:
+#     if not blob.name.endswith('/'):
+#         file_name = os.path.basename(blob.name)
+#         local_file_path = os.path.join('figures', 'players', file_name)
+#         blob.download_to_filename(local_file_path)
+#         player_files.append(local_file_path)
 
-# Get bucket from Google Cloud Storage
-bucket = client.get_bucket(bucket_name)
 
-# Create local directory if it doesn't exist
-if not os.path.exists('figures/players'):
-    os.makedirs('figures/players')
+if not os.path.exists('figures/team'):
+    os.makedirs('figures/team')
 
 # Download player images from Google Cloud Storage
 blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
+blob_list_team = bucket.list_blobs(prefix=folder_prefix_team)
+
 player_files = []
+team_files = []
+
+# Download player images
 for blob in blob_list_players:
     if not blob.name.endswith('/'):
         file_name = os.path.basename(blob.name)
@@ -142,22 +161,56 @@ for blob in blob_list_players:
         blob.download_to_filename(local_file_path)
         player_files.append(local_file_path)
 
-# Group player images by fours
-player_images_grouped = [player_files[i:i+4] for i in range(0, len(player_files), 4)]
+# Download team images
+for blob in blob_list_team:
+    if not blob.name.endswith('/'):
+        file_name = os.path.basename(blob.name)
+        local_file_path = os.path.join('figures', 'team', file_name)
+        blob.download_to_filename(local_file_path)
+        team_files.append(local_file_path)
 
-# Construct the figures list
-figures = [[file_path for file_path in group] for group in player_images_grouped]
 
-# Tweet the grouped player images
-for i, player_images in enumerate(figures):
-    if player_images:
-        tweet_content = f'{match_name} Players Dashboards (Group {i+1}):'
-        tweet_result = tweet_images(api, player_images, tweet=tweet_content)
-        print("Player main tweet posted successfully:", tweet_result)
-        player_first_tweet_id = tweet_result.data['id']
 
-        # Iterate through other groups of player images for replies
-        for j, other_group in enumerate(figures):
-            if j != i:  # Skip the current group
-                reply_result = reply_images(api, other_group, player_first_tweet_id)
-                print("Player dashboard reply posted successfully:", reply_result)
+
+figures_players_folder = "figures/players"
+image_files = os.listdir(figures_players_folder)
+image_groups = []
+
+for i in range(0, len(image_files), 4):
+    group = image_files[i:i+4]
+    image_groups.append(group)
+
+figures = []
+for group in image_groups:
+    group_paths = [f"{figures_players_folder}/{image}" for image in group]
+    figures.append(group_paths)
+
+first_tweet = tweet_images(api, figures[0], tweet= f'{match_name} Players Dashboards')
+first_tweet_id = first_tweet.data.id
+
+previous_reply_id = first_tweet_id
+for images in figures[1:]:
+    reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
+    previous_reply_id = reply_to_previous_reply.data.id
+
+
+figures_team_folder = "figures/team"
+image_team_files = os.listdir(figures_team_folder)
+image_team_groups = []
+
+for i in range(0, len(image_team_files), 4):
+    group = image_team_files[i:i+4]
+    image_team_groups.append(group)
+
+figures_team = []
+for group in image_team_groups:
+    group_paths = [f"{figures_team_folder}/{image}" for image in group]
+    figures_team.append(group_paths)
+
+first_tweet = tweet_images(api, figures_team[0], tweet= f'{match_name} Dashboards')
+first_tweet_id = first_tweet.data.id
+
+previous_reply_id = first_tweet_id
+for images in figures_team[1:]:
+    reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
+    previous_reply_id = reply_to_previous_reply.data.id

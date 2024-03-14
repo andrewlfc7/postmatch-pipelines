@@ -487,7 +487,7 @@ for player_name in centerbacks_in_match:
     plt.savefig(
         figure_buffer,
         format="png",
-        dpi=600,
+        dpi=500,
         bbox_inches="tight",
         edgecolor="none",
         transparent=False
@@ -659,7 +659,7 @@ for player_name in fullbacks_in_match:
     plt.savefig(
         figure_buffer,
         format="png",
-        dpi=600,
+        dpi=500,
         bbox_inches="tight",
         edgecolor="none",
         transparent=False
@@ -834,7 +834,7 @@ for player_name in midfielders_in_match:
     plt.savefig(
         figure_buffer,
         format="png",
-        dpi=600,
+        dpi=500,
         bbox_inches="tight",
         edgecolor="none",
         transparent=False
@@ -1006,7 +1006,7 @@ for player_name in forwards_in_match:
     plt.savefig(
         figure_buffer,
         format="png",
-        dpi=600,
+        dpi=500,
         bbox_inches="tight",
         edgecolor="none",
         transparent=False
