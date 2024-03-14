@@ -124,24 +124,9 @@ folder_prefix_players = f'figures/{today}/players/'
 folder_prefix_team = f'figures/{today}/team/'
 
 bucket = client.get_bucket(bucket_name)
-#
-# # Get bucket from Google Cloud Storage
-# bucket = client.get_bucket(bucket_name)
-#
-# # Create local directory if it doesn't exist
-# if not os.path.exists('figures/players'):
-#     os.makedirs('figures/players')
-#
-# # Download player images from Google Cloud Storage
-# blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
-# player_files = []
-# for blob in blob_list_players:
-#     if not blob.name.endswith('/'):
-#         file_name = os.path.basename(blob.name)
-#         local_file_path = os.path.join('figures', 'players', file_name)
-#         blob.download_to_filename(local_file_path)
-#         player_files.append(local_file_path)
 
+if not os.path.exists('figures/players'):
+    os.makedirs('figures/players')
 
 if not os.path.exists('figures/team'):
     os.makedirs('figures/team')
