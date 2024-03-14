@@ -88,7 +88,7 @@ def reply_images(api: tweepy.Client, images,tweet_id):
 #     f'figures/Cody_Gakpo_avgDashboard{today}.png',
 #     f'figures/Conor_Bradley_avgDashboard{today}.png'
 # ]
-#
+
 
 figures = [
     # 'figures/dashboardmain2024-03-02.png',
