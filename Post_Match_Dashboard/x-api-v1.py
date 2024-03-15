@@ -8,6 +8,7 @@ import json
 import pandas as pd
 from sqlalchemy import create_engine
 from joblib import Parallel, delayed
+import asyncio
 
 
 eastern = pytz.timezone('US/Eastern')
@@ -184,18 +185,37 @@ for group in image_team_groups:
 
 
 
-first_player_tweet_id = tweet_images(api, figures[0], tweet=f'{match_name} Players Dashboards')
-previous_player_reply_id = first_player_tweet_id
+# first_player_tweet_id = tweet_images(api, figures[0], tweet=f'{match_name} Players Dashboards')
+# previous_player_reply_id = first_player_tweet_id
 
-first_team_tweet_id = tweet_images(api, figures_team[0], tweet=f'{match_name} Dashboards')
-previous_team_reply_id = first_team_tweet_id
+# first_team_tweet_id = tweet_images(api, figures_team[0], tweet=f'{match_name} Dashboards')
+# previous_team_reply_id = first_team_tweet_id
 
-player_thread = Parallel(n_jobs=-1)(
-    delayed(reply_images)(api, images, previous_player_reply_id) for images in figures[1:]
-)
+# player_thread = Parallel(n_jobs=-1)(
+#     delayed(reply_images)(api, images, previous_player_reply_id) for images in figures[1:]
+# )
 
-team_thread = Parallel(n_jobs=-1)(
-    delayed(reply_images)(api, images, previous_team_reply_id) for images in figures_team[1:]
-)
+# team_thread = Parallel(n_jobs=-1)(
+#     delayed(reply_images)(api, images, previous_team_reply_id) for images in figures_team[1:]
+# )
 
-Parallel(n_jobs=-1)(player_thread + team_thread)
+# Parallel(n_jobs=-1)(player_thread + team_thread)
+
+
+async def tweet_and_reply(api, figures, figures_team, match_name):
+    first_player_tweet = await tweet_images(api, figures[0], tweet=f'{match_name} Players Dashboards')
+    previous_player_reply_id = first_player_tweet.data['id']
+
+    first_team_tweet = await tweet_images(api, figures_team[0], tweet=f'{match_name} Dashboards')
+    previous_team_reply_id = first_team_tweet.data['id']
+
+    for images in figures[1:]:
+        reply_to_previous_reply = await reply_images(api, images, tweet_id=previous_player_reply_id)
+        previous_player_reply_id = reply_to_previous_reply.data['id']
+
+    for images in figures_team[1:]:
+        reply_to_previous_reply = await reply_images(api, images, tweet_id=previous_team_reply_id)
+        previous_team_reply_id = reply_to_previous_reply.data['id']
+
+asyncio.run(tweet_and_reply(api, figures, figures_team, match_name))
+
