@@ -7,6 +7,8 @@ from utils import get_match_name
 import json
 import pandas as pd
 from sqlalchemy import create_engine
+from joblib import Parallel, delayed
+
 
 eastern = pytz.timezone('US/Eastern')
 today = datetime.datetime.now(eastern).date()
@@ -128,17 +130,16 @@ bucket = client.get_bucket(bucket_name)
 if not os.path.exists('figures/players'):
     os.makedirs('figures/players')
 
+
 if not os.path.exists('figures/team'):
     os.makedirs('figures/team')
 
-# Download player images from Google Cloud Storage
 blob_list_players = bucket.list_blobs(prefix=folder_prefix_players)
 blob_list_team = bucket.list_blobs(prefix=folder_prefix_team)
 
 player_files = []
 team_files = []
 
-# Download player images
 for blob in blob_list_players:
     if not blob.name.endswith('/'):
         file_name = os.path.basename(blob.name)
@@ -146,15 +147,12 @@ for blob in blob_list_players:
         blob.download_to_filename(local_file_path)
         player_files.append(local_file_path)
 
-# Download team images
 for blob in blob_list_team:
     if not blob.name.endswith('/'):
         file_name = os.path.basename(blob.name)
         local_file_path = os.path.join('figures', 'team', file_name)
         blob.download_to_filename(local_file_path)
         team_files.append(local_file_path)
-
-
 
 
 figures_players_folder = "figures/players"
@@ -170,14 +168,6 @@ for group in image_groups:
     group_paths = [f"{figures_players_folder}/{image}" for image in group]
     figures.append(group_paths)
 
-# first_tweet = tweet_images(api, figures[0], tweet= f'{match_name} Players Dashboards')
-# first_tweet_id = first_tweet.data['id']
-
-# previous_reply_id = first_tweet_id
-# for images in figures[1:]:
-#     reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
-#     previous_reply_id = reply_to_previous_reply.data['id']
-
 
 figures_team_folder = "figures/team"
 image_team_files = os.listdir(figures_team_folder)
@@ -192,10 +182,20 @@ for group in image_team_groups:
     group_paths = [f"{figures_team_folder}/{image}" for image in group]
     figures_team.append(group_paths)
 
-first_team_tweet = tweet_images(api, figures_team[0], tweet= f'{match_name} Dashboards')
-first_team_tweet_id = first_team_tweet.data['id']
 
-previous_reply_id = first_team_tweet_id
-for images in figures_team[1:]:
-    reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
-    previous_reply_id = reply_to_previous_reply.data['id']
+
+first_player_tweet_id = tweet_images(api, figures[0], tweet=f'{match_name} Players Dashboards')
+previous_player_reply_id = first_player_tweet_id
+
+first_team_tweet_id = tweet_images(api, figures_team[0], tweet=f'{match_name} Dashboards')
+previous_team_reply_id = first_team_tweet_id
+
+player_thread = Parallel(n_jobs=-1)(
+    delayed(reply_images)(api, images, previous_player_reply_id) for images in figures[1:]
+)
+
+team_thread = Parallel(n_jobs=-1)(
+    delayed(reply_images)(api, images, previous_team_reply_id) for images in figures_team[1:]
+)
+
+Parallel(n_jobs=-1)(player_thread + team_thread)
