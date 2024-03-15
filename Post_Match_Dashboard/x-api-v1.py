@@ -170,13 +170,13 @@ for group in image_groups:
     group_paths = [f"{figures_players_folder}/{image}" for image in group]
     figures.append(group_paths)
 
-first_tweet = tweet_images(api, figures[0], tweet= f'{match_name} Players Dashboards')
-first_tweet_id = first_tweet.data['id']
+# first_tweet = tweet_images(api, figures[0], tweet= f'{match_name} Players Dashboards')
+# first_tweet_id = first_tweet.data['id']
 
-previous_reply_id = first_tweet_id
-for images in figures[1:]:
-    reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
-    previous_reply_id = reply_to_previous_reply.data['id']
+# previous_reply_id = first_tweet_id
+# for images in figures[1:]:
+#     reply_to_previous_reply = reply_images(api, images, tweet_id=previous_reply_id)
+#     previous_reply_id = reply_to_previous_reply.data['id']
 
 
 figures_team_folder = "figures/team"
