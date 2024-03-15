@@ -66,7 +66,7 @@ def verify_twitter_credentials():
 
     return api
 
-def tweet_images(api: tweepy.Client, images, tweet=''):
+async def tweet_images(api: tweepy.Client, images, tweet=''):
     """Upload image to Twitter with a tweet"""
 
     consumer_key = os.environ['API_KEY']
@@ -91,7 +91,7 @@ def tweet_images(api: tweepy.Client, images, tweet=''):
     return post_result
 
 
-def reply_images(api: tweepy.Client, images,tweet_id):
+async def reply_images(api: tweepy.Client, images,tweet_id):
     """Upload image to Twitter with a tweet"""
     consumer_key = os.environ['API_KEY']
     consumer_secret = os.environ['API_SECRET']
