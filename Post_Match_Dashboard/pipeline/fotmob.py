@@ -1,7 +1,6 @@
 import json
 import requests
 import pandas as pd
-
 def get_shots_data(match_id):
     response = requests.get(f'https://www.fotmob.com/api/matchDetails?matchId={match_id}&ccode3=USA&timezone=America%2FChicago&refresh=true&includeBuzzTab=false&acceptLanguage=en-US')
 
@@ -13,6 +12,7 @@ def get_shots_data(match_id):
 
     competitions = data['general']['parentLeagueName']
     teamcolors = data['general']['teamColors']
+
 
     homeTeam = data['general']['homeTeam']
     awayTeam = data['general']['awayTeam']
@@ -34,6 +34,7 @@ def get_shots_data(match_id):
     df_shot['match_date'] = matchTimeUTCDate
     df_shot['competition'] = competitions
 
+
     df_shot['Venue'] = ''
     for index, row in df_shot.iterrows():
         if row['teamId'] == home_team_id:
@@ -46,16 +47,10 @@ def get_shots_data(match_id):
     def extract_value(d, key):
         return d[key]
 
-    if 'onGoalShot' in df_shot.columns:
-        df_shot['onGoalShot_X'] = df_shot['onGoalShot'].apply(extract_value, args=('x',))
-        df_shot['onGoalShot_Y'] = df_shot['onGoalShot'].apply(extract_value, args=('y',))
-        df_shot['onGoalShot_ZR'] = df_shot['onGoalShot'].apply(extract_value, args=('zoomRatio',))
-        df_shot.drop(['onGoalShot'], axis=1, inplace=True)
-    else:
-        df_shot['onGoalShot_X'] = ''
-        df_shot['onGoalShot_Y'] = ''
-        df_shot['onGoalShot_ZR'] = ''
-
+    df_shot['onGoalShot_X'] = df_shot['onGoalShot'].apply(extract_value, args=('x',))
+    df_shot['onGoalShot_Y'] = df_shot['onGoalShot'].apply(extract_value, args=('y',))
+    df_shot['onGoalShot_ZR'] = df_shot['onGoalShot'].apply(extract_value, args=('zoomRatio',))
+    df_shot.drop(['onGoalShot'], axis=1, inplace=True)
     if 'shortName' in df_shot.columns:
         df_shot.drop(['shortName'], axis=1, inplace=True)
 
@@ -67,6 +62,8 @@ def get_shots_data(match_id):
         'isSavedOffLine', 'firstName', 'lastName', 'fullName', 'teamColor',
         'match_id', 'match_date', 'competition', 'Venue', 'TeamName',
         'onGoalShot_X', 'onGoalShot_Y', 'onGoalShot_ZR'
+
     ]]
+
 
     return df_shot
