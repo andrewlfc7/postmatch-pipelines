@@ -126,10 +126,10 @@ events = custom_events(data_processed_v2)
 data_shots = get_shots_data(match_id)
 
 
-competition = data_shots['competition'].iloc[0]
+# competition = data_shots['competition'].iloc[0]
 
 
-events['competition'] = competition
+events['competition'] = 'FA Cup'
 
 
 csv_filename = f"processed_data{match_date}.csv"
@@ -179,9 +179,9 @@ if not opta_exists or not fotmob_exists:
     if not opta_exists:
         events.to_sql('opta_event_data', engine, if_exists='append', index=False, dtype={"qualifiers": sqlalchemy.types.JSON, "satisfiedEventsTypes": sqlalchemy.types.JSON})
 
-    # Insert data into 'fotmob_shots_data' table
-    if not fotmob_exists:
-        data_shots.to_sql('fotmob_shots_data', engine, if_exists='append', index=False)
+    # # Insert data into 'fotmob_shots_data' table
+    # if not fotmob_exists:
+    #     data_shots.to_sql('fotmob_shots_data', engine, if_exists='append', index=False)
 
 
 # events['qualifiers'] = events['qualifiers'].apply(json.dumps)
