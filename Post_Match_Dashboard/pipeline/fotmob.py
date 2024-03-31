@@ -47,25 +47,25 @@ def get_shots_data(match_id):
     def extract_value(d, key):
         return d[key]
 
-    # df_shot['onGoalShot_X'] = df_shot['onGoalShot'].apply(extract_value, args=('x',))
-    # df_shot['onGoalShot_Y'] = df_shot['onGoalShot'].apply(extract_value, args=('y',))
-    # df_shot['onGoalShot_ZR'] = df_shot['onGoalShot'].apply(extract_value, args=('zoomRatio',))
-    # df_shot.drop(['onGoalShot'], axis=1, inplace=True)
+    df_shot['onGoalShot_X'] = df_shot['onGoalShot'].apply(extract_value, args=('x',))
+    df_shot['onGoalShot_Y'] = df_shot['onGoalShot'].apply(extract_value, args=('y',))
+    df_shot['onGoalShot_ZR'] = df_shot['onGoalShot'].apply(extract_value, args=('zoomRatio',))
+    df_shot.drop(['onGoalShot'], axis=1, inplace=True)
     if 'shortName' in df_shot.columns:
         df_shot.drop(['shortName'], axis=1, inplace=True)
     if 'onGoalShot' in df_shot.columns:
         df_shot.drop(['onGoalShot'], axis=1, inplace=True)
 
-    # df_shot = df_shot[[
-    #     'id', 'eventType', 'teamId', 'playerId', 'playerName', 'x', 'y', 'min',
-    #     'minAdded', 'isBlocked', 'isOnTarget', 'blockedX', 'blockedY',
-    #     'goalCrossedY', 'goalCrossedZ', 'expectedGoals',
-    #     'expectedGoalsOnTarget', 'shotType', 'situation', 'period', 'isOwnGoal',
-    #     'isSavedOffLine', 'firstName', 'lastName', 'fullName', 'teamColor',
-    #     'match_id', 'match_date', 'competition', 'Venue', 'TeamName',
-    #     'onGoalShot_X', 'onGoalShot_Y', 'onGoalShot_ZR'
+    df_shot = df_shot[[
+         'id', 'eventType', 'teamId', 'playerId', 'playerName', 'x', 'y', 'min',
+         'minAdded', 'isBlocked', 'isOnTarget', 'blockedX', 'blockedY',
+         'goalCrossedY', 'goalCrossedZ', 'expectedGoals',
+         'expectedGoalsOnTarget', 'shotType', 'situation', 'period', 'isOwnGoal',
+         'isSavedOffLine', 'firstName', 'lastName', 'fullName', 'teamColor',
+         'match_id', 'match_date', 'competition', 'Venue', 'TeamName',
+         'onGoalShot_X', 'onGoalShot_Y', 'onGoalShot_ZR'
 
-    # ]]
+     ]]
 
 
     return df_shot
