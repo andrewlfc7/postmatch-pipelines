@@ -1909,7 +1909,7 @@ def plot_player_hull(player_df, axis, edge_color, face_color, scatter_color, avg
         whovis.plot_player_hull_team(player_df, axis, poly_edgecolor=edge_color, poly_facecolor=face_color,
                                       scatter_facecolor=scatter_color, avg_marker_size=avg_marker_size, sd=sd)
     else:
-        print(f"Not enough points for {player_df.name}. Skipping...")
+        print(f"Not enough points for {player}. Skipping...")
 
 for player in Home_gk:
     plot_player_hull(player_dfs[player], ax1, '#44335a', '#44335a', '#44335a')
