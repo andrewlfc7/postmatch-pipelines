@@ -1846,212 +1846,212 @@ Away_sub = data[(data['Venue'] == 'Away') & (data['position'].isin(['Sub']))]['p
 
 
 
-# fig = plt.figure(figsize=(8, 6), constrained_layout=True, dpi=300)
-# gs = fig.add_gridspec(ncols=2, nrows=2)
-# fig.set_facecolor("#201D1D")
-# # create subplots using gridspec
-# ax1 = fig.add_subplot(gs[0, 0])
-# ax2 = fig.add_subplot(gs[0, 1])
-# ax3 = fig.add_subplot(gs[1, 0])
-# ax4 = fig.add_subplot(gs[1, 1])
+fig = plt.figure(figsize=(8, 6), constrained_layout=True, dpi=300)
+gs = fig.add_gridspec(ncols=2, nrows=2)
+fig.set_facecolor("#201D1D")
+# create subplots using gridspec
+ax1 = fig.add_subplot(gs[0, 0])
+ax2 = fig.add_subplot(gs[0, 1])
+ax3 = fig.add_subplot(gs[1, 0])
+ax4 = fig.add_subplot(gs[1, 1])
 
-# axes = [ax1, ax2, ax3, ax4]
+axes = [ax1, ax2, ax3, ax4]
 
-# # apply modifications to all subplots
-# for ax in axes:
-#     ax.set_xticks([])
-#     ax.set_yticks([])
-#     ax.set_xlabel('')
-#     ax.set_ylabel('')
-#     ax.grid(False)
-#     ax.spines['top'].set_visible(False)
-#     ax.spines['right'].set_visible(False)
-#     ax.spines['bottom'].set_visible(False)
-#     ax.spines['left'].set_visible(False)
-#     ax.set_facecolor("#201D1D")
-#     pitch = Pitch(
-#         pitch_color='#201D1D',
-#         pitch_type='opta',
-#         goal_type='box',
-#         linewidth=1.25,
-#         line_color='black',
-#         half=False
-#     )
-#     pitch.draw(ax = ax)
+# apply modifications to all subplots
+for ax in axes:
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_xlabel('')
+    ax.set_ylabel('')
+    ax.grid(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.set_facecolor("#201D1D")
+    pitch = Pitch(
+        pitch_color='#201D1D',
+        pitch_type='opta',
+        goal_type='box',
+        linewidth=1.25,
+        line_color='black',
+        half=False
+    )
+    pitch.draw(ax = ax)
 
-#     pos_x = pitch.dim.positional_x
-#     pos_y = pitch.dim.positional_y
-#     for x in pos_x[1:-1]:
-#         ax.plot([x,x], [pos_y[0], pos_y[-1]], color='#000000', ls='dashed', zorder=0, lw=0.3)
-#     for y in pos_y[1:-1]:
-#         ax.plot([pos_x[0], pos_x[-1]], [y,y], color='#000000', ls='dashed', zorder=0, lw=0.3)
-
-
-
-
-# ax1.set_title(f"{home_name} Territory Map Defensive Actions",size="6", c="#EFE9F4", loc="center")
-# ax2.set_title(f"{away_name} Territory Map Defensive Actions",size="6", c="#EFE9F4", loc="center")
-
-# ax3.set_title(f"{home_name} Territory Map Offensive Actions",size="6", c="#EFE9F4", loc="center")
-# ax4.set_title(f"{away_name} Territory Map Offensive Actions",size="6", c="#EFE9F4", loc="center")
-
-
-
-# team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
-# club_icon = Image.open(team_logo_path).convert('RGBA')
-
-
-# away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
-# away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
-
-# def plot_player_hull(player_df, axis, edge_color, face_color, scatter_color, avg_marker_size=200, sd=2):
-#     if not player_df.empty and len(player_df) > 3:
-#         whovis.plot_player_hull_team(player_df, axis, poly_edgecolor=edge_color, poly_facecolor=face_color,
-#                                       scatter_facecolor=scatter_color, avg_marker_size=avg_marker_size, sd=sd)
-#     else:
-#         print(f"Not enough points for {player}. Skipping...")
-
-# for player in Home_gk:
-#     plot_player_hull(player_dfs[player], ax1, '#44335a', '#44335a', '#44335a')
-
-# for player in Home_gk:
-#     plot_player_hull(player_offensive_actions[player], ax3, '#44335a', '#44335a', '#44335a')
-
-# for player in Home_cb:
-#     plot_player_hull(player_dfs[player], ax1, '#674997', '#674997', '#674997')
-
-# for player in Home_cb:
-#     plot_player_hull(player_offensive_actions[player], ax3, '#674997', '#674997', '#674997')
-
-# for player in Home_fullbacks:
-#     plot_player_hull(player_dfs[player], ax1, '#007a72', '#007a72', '#007a72')
-
-# for player in Home_fullbacks:
-#     plot_player_hull(player_offensive_actions[player], ax3, '#007a72', '#007a72', '#007a72')
-
-# for player in Home_midfielders:
-#     plot_player_hull(player_dfs[player], ax1, '#d1495b', '#d1495b', '#d1495b')
-
-# for player in Home_midfielders:
-#     plot_player_hull(player_offensive_actions[player], ax3, '#d1495b', '#d1495b', '#d1495b')
-
-# for player in Home_attackers:
-#     plot_player_hull(player_dfs[player], ax1, '#edae49', '#edae49', '#edae49')
-
-# for player in Home_attackers:
-#     plot_player_hull(player_offensive_actions[player], ax3, '#edae49', '#edae49', '#edae49')
-
-# for player in Away_gk:
-#     plot_player_hull(player_dfs[player], ax2, '#44335a', '#44335a', '#44335a')
-
-# for player in Away_gk:
-#     plot_player_hull(player_offensive_actions[player], ax4, '#44335a', '#44335a', '#44335a')
-
-# for player in Away_cb:
-#     plot_player_hull(player_dfs[player], ax2, '#674997', '#674997', '#674997')
-
-# for player in Away_cb:
-#     plot_player_hull(player_offensive_actions[player], ax4, '#674997', '#674997', '#674997')
-
-# for player in Away_fullbacks:
-#     plot_player_hull(player_dfs[player], ax2, '#007a72', '#007a72', '#007a72')
-
-# for player in Away_fullbacks:
-#     plot_player_hull(player_offensive_actions[player], ax4, '#007a72', '#007a72', '#007a72')
-
-# for player in Away_midfielders:
-#     plot_player_hull(player_dfs[player], ax2, '#d1495b', '#d1495b', '#d1495b')
-
-# for player in Away_midfielders:
-#     plot_player_hull(player_offensive_actions[player], ax4, '#d1495b', '#d1495b', '#d1495b')
-
-# for player in Away_attackers:
-#     plot_player_hull(player_dfs[player], ax2, '#edae49', '#edae49', '#edae49')
-
-# for player in Away_attackers:
-#     plot_player_hull(player_offensive_actions[player], ax4, '#edae49', '#edae49', '#edae49')
-
-
-
-# away_logo_ax = fig.add_axes([.90, 1, .10, .08], frameon=False)
-
-
-# away_logo_ax.imshow(away_club_icon, aspect='equal')
-# away_logo_ax.axis('off')
-
-# away_logo_ax.set_xticks([])
-# away_logo_ax.set_yticks([])
-
-
-# logo_ax = fig.add_axes([0, 1, 0.10, 0.08], frameon=False)
-# logo_ax.imshow(club_icon, aspect='equal')
-# logo_ax.set_xticks([])
-# logo_ax.set_yticks([])
-
-
-# #logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
-# #logo_ax.imshow(club_icon)
-# logo_ax.axis('off')
-# # create a new Axes object on the figure
-# # ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
-
-
-# fig_text(
-#     0.5,
-#     1.12,
-#     match_score,
-#     fontsize=8,
-#     color="#FCE6E6",
-#     ha="center",
-#     va="center",
-#     transform=ax.transAxes
-# )
-
-# fig_text(
-#     0.5,
-#     1.06,
-#     match_name,
-#     fontsize=6,
-#     color="#FCE6E6",
-#     ha="center",
-#     va="center",
-#     transform=ax.transAxes
-# )
-
-# fig_text(
-#     0.5,
-#     1.01,
-#     match_label + " | " + match_season + " | " + matchDate,
-#     fontsize=6,
-#     color="#FCE6E6",
-#     ha="center",
-#     va="center",
-#     transform=ax.transAxes
-# )
+    pos_x = pitch.dim.positional_x
+    pos_y = pitch.dim.positional_y
+    for x in pos_x[1:-1]:
+        ax.plot([x,x], [pos_y[0], pos_y[-1]], color='#000000', ls='dashed', zorder=0, lw=0.3)
+    for y in pos_y[1:-1]:
+        ax.plot([pos_x[0], pos_x[-1]], [y,y], color='#000000', ls='dashed', zorder=0, lw=0.3)
 
 
 
 
-# ax.set_axis_off()
+ax1.set_title(f"{home_name} Territory Map Defensive Actions",size="6", c="#EFE9F4", loc="center")
+ax2.set_title(f"{away_name} Territory Map Defensive Actions",size="6", c="#EFE9F4", loc="center")
 
-# # fig.savefig(f"Post_Match_Dashboard/figures/dashboardTerritory_Map{matchDate}.png",bbox_inches="tight" ,dpi=600)
+ax3.set_title(f"{home_name} Territory Map Offensive Actions",size="6", c="#EFE9F4", loc="center")
+ax4.set_title(f"{away_name} Territory Map Offensive Actions",size="6", c="#EFE9F4", loc="center")
 
-# figure_buffer = BytesIO()
-# # Save the figure to the BytesIO object
-# plt.savefig(
-#     figure_buffer,
-#     format="png",  # Use the appropriate format for your figure
-#     dpi=500,
-#     bbox_inches="tight",
-#     edgecolor="none",
-#     transparent=False
-# )
-# # Reset the buffer position to the beginning
-# figure_buffer.seek(0)
-# # Specify the blob path within the bucket
-# blob_path = f"figures/{today}/team/dashboardTerritory_Map{matchDate}.png"
-# # Create a new Blob and upload the figure
-# blob = bucket.blob(blob_path)
-# blob.upload_from_file(figure_buffer, content_type="image/png")
-# # Close the BytesIO buffer
-# figure_buffer.close()
+
+
+team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_homeID}.png'
+club_icon = Image.open(team_logo_path).convert('RGBA')
+
+
+away_team_logo_path = f'Post_Match_Dashboard/Data/team_logo/{Fotmob_awayID}.png'
+away_club_icon = Image.open(away_team_logo_path).convert('RGBA')
+
+def plot_player_hull(player_df, axis, edge_color, face_color, scatter_color, avg_marker_size=200, sd=2):
+    if not player_df.empty and len(player_df) > 3:
+        whovis.plot_player_hull_team(player_df, axis, poly_edgecolor=edge_color, poly_facecolor=face_color,
+                                      scatter_facecolor=scatter_color, avg_marker_size=avg_marker_size, sd=sd)
+    else:
+        print(f"Not enough points for {player}. Skipping...")
+
+for player in Home_gk:
+    plot_player_hull(player_dfs[player], ax1, '#44335a', '#44335a', '#44335a')
+
+for player in Home_gk:
+    plot_player_hull(player_offensive_actions[player], ax3, '#44335a', '#44335a', '#44335a')
+
+for player in Home_cb:
+    plot_player_hull(player_dfs[player], ax1, '#674997', '#674997', '#674997')
+
+for player in Home_cb:
+    plot_player_hull(player_offensive_actions[player], ax3, '#674997', '#674997', '#674997')
+
+for player in Home_fullbacks:
+    plot_player_hull(player_dfs[player], ax1, '#007a72', '#007a72', '#007a72')
+
+for player in Home_fullbacks:
+    plot_player_hull(player_offensive_actions[player], ax3, '#007a72', '#007a72', '#007a72')
+
+for player in Home_midfielders:
+    plot_player_hull(player_dfs[player], ax1, '#d1495b', '#d1495b', '#d1495b')
+
+for player in Home_midfielders:
+    plot_player_hull(player_offensive_actions[player], ax3, '#d1495b', '#d1495b', '#d1495b')
+
+for player in Home_attackers:
+    plot_player_hull(player_dfs[player], ax1, '#edae49', '#edae49', '#edae49')
+
+for player in Home_attackers:
+    plot_player_hull(player_offensive_actions[player], ax3, '#edae49', '#edae49', '#edae49')
+
+for player in Away_gk:
+    plot_player_hull(player_dfs[player], ax2, '#44335a', '#44335a', '#44335a')
+
+for player in Away_gk:
+    plot_player_hull(player_offensive_actions[player], ax4, '#44335a', '#44335a', '#44335a')
+
+for player in Away_cb:
+    plot_player_hull(player_dfs[player], ax2, '#674997', '#674997', '#674997')
+
+for player in Away_cb:
+    plot_player_hull(player_offensive_actions[player], ax4, '#674997', '#674997', '#674997')
+
+for player in Away_fullbacks:
+    plot_player_hull(player_dfs[player], ax2, '#007a72', '#007a72', '#007a72')
+
+for player in Away_fullbacks:
+    plot_player_hull(player_offensive_actions[player], ax4, '#007a72', '#007a72', '#007a72')
+
+for player in Away_midfielders:
+    plot_player_hull(player_dfs[player], ax2, '#d1495b', '#d1495b', '#d1495b')
+
+for player in Away_midfielders:
+    plot_player_hull(player_offensive_actions[player], ax4, '#d1495b', '#d1495b', '#d1495b')
+
+for player in Away_attackers:
+    plot_player_hull(player_dfs[player], ax2, '#edae49', '#edae49', '#edae49')
+
+for player in Away_attackers:
+    plot_player_hull(player_offensive_actions[player], ax4, '#edae49', '#edae49', '#edae49')
+
+
+
+away_logo_ax = fig.add_axes([.90, 1, .10, .08], frameon=False)
+
+
+away_logo_ax.imshow(away_club_icon, aspect='equal')
+away_logo_ax.axis('off')
+
+away_logo_ax.set_xticks([])
+away_logo_ax.set_yticks([])
+
+
+logo_ax = fig.add_axes([0, 1, 0.10, 0.08], frameon=False)
+logo_ax.imshow(club_icon, aspect='equal')
+logo_ax.set_xticks([])
+logo_ax.set_yticks([])
+
+
+#logo_ax = fig.add_axes([0, 1, 0.1, 0.1], frameon=False)
+#logo_ax.imshow(club_icon)
+logo_ax.axis('off')
+# create a new Axes object on the figure
+# ax = fig.add_axes([0.5, 1, 0.0, 0.0], frameon=False)
+
+
+fig_text(
+    0.5,
+    1.12,
+    match_score,
+    fontsize=8,
+    color="#FCE6E6",
+    ha="center",
+    va="center",
+    transform=ax.transAxes
+)
+
+fig_text(
+    0.5,
+    1.06,
+    match_name,
+    fontsize=6,
+    color="#FCE6E6",
+    ha="center",
+    va="center",
+    transform=ax.transAxes
+)
+
+fig_text(
+    0.5,
+    1.01,
+    match_label + " | " + match_season + " | " + matchDate,
+    fontsize=6,
+    color="#FCE6E6",
+    ha="center",
+    va="center",
+    transform=ax.transAxes
+)
+
+
+
+
+ax.set_axis_off()
+
+# fig.savefig(f"Post_Match_Dashboard/figures/dashboardTerritory_Map{matchDate}.png",bbox_inches="tight" ,dpi=600)
+
+figure_buffer = BytesIO()
+# Save the figure to the BytesIO object
+plt.savefig(
+    figure_buffer,
+    format="png",  # Use the appropriate format for your figure
+    dpi=500,
+    bbox_inches="tight",
+    edgecolor="none",
+    transparent=False
+)
+# Reset the buffer position to the beginning
+figure_buffer.seek(0)
+# Specify the blob path within the bucket
+blob_path = f"figures/{today}/team/dashboardTerritory_Map{matchDate}.png"
+# Create a new Blob and upload the figure
+blob = bucket.blob(blob_path)
+blob.upload_from_file(figure_buffer, content_type="image/png")
+# Close the BytesIO buffer
+figure_buffer.close()
