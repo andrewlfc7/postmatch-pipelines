@@ -1,5 +1,5 @@
-## Flowchart
-![Flowchart](https://github.com/andrewlfc7/postmatch-pipelines/blob/main/flowchart.jpeg)
+## Architecture
+![Architecture](https://github.com/andrewlfc7/postmatch-pipelines/blob/main/flowchart.jpeg)
 
 
 ## Dashboards
